@@ -16,7 +16,7 @@ const MonitoredUtilityList = ({ id_device }) => {
 
   return (
     <>
-      <div className="bg-info text-lg-center font-weight-bold mb-2">
+      <div className="bg-dark text-lg-center font-weight-bold p-1">
         Monitored Utility
       </div>
       <div
@@ -25,7 +25,7 @@ const MonitoredUtilityList = ({ id_device }) => {
           overflowY: "auto",
         }}
       >
-        <table className="table table-hover table-outline mb-0 d-none d-sm-table">
+        <table className="table table-hover mb-0 d-none d-sm-table text-center">
           <thead className="thead-dark">
             <tr>
               <th>Name</th>

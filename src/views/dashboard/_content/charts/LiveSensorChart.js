@@ -36,9 +36,13 @@ const LiveSensorChart = ({ id_device }) => {
     //     },
     //   ],
     // },
+    // title: {
+    //   display: true,
+    //   text: "Incoming Live Data", // Judul grafik
+    // },
     legend: {
       display: true,
-      position: "left", // Menentukan posisi legenda
+      position: "top", // Menentukan posisi legenda
       labels: {
         fontColor: "#555", // Warna label legenda
         fontSize: 12,
@@ -56,7 +60,7 @@ const LiveSensorChart = ({ id_device }) => {
       if (!sensorData.result) return setChartData({});
       sensorData.result.forEach((sensor) => {
         if (sensor.sensor_type_parameter in EXCLUDED_CHART_PARAM) return;
-        if (sensor.sensor_type_parameter !== "ptot") return; // hanya ambil data ptot saja
+        if (sensor.sensor_type_parameter !== "ptot") return; // hanya show data dan legend ptot saja
         chartData.push({
           param: sensor.sensor_type_parameter,
           label: getSensorInChartNaming(sensor.sensor_type_parameter),
@@ -102,7 +106,7 @@ const LiveSensorChart = ({ id_device }) => {
   if (!chartData) return <BigSPinner />;
   return (
     <>
-      <div className="bg-info text-lg-center font-weight-bold mb-3">
+      <div className="bg-dark text-lg-center font-weight-bold mb-2 p-1 rounded">
         Incoming Live Data
       </div>
       <CRow>

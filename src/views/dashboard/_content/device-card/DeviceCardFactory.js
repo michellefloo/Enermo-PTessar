@@ -101,54 +101,41 @@ const DeviceCardFactory = ({ device }) => {
       </CCardHeader>
 
       <CCardBody>
-        <div className="bg-info text-lg-center font-weight-bold mb-3">
+        <div className="bg-dark text-lg-center font-weight-bold mb-2 p-1 rounded">
           This Day Total
         </div>
-        {availableParams.map(
-          (_, index) =>
-            index % 4 === 0 && (
-              <Fragment key={index + 1}>
-                <CRow>
-                  <CCol sm="3" md="3" className="font-weight-bold text-center">
-                    <h4>{availableParams[index]?.type}</h4>
-                  </CCol>
-                  <CCol sm="3" md="3" className="font-weight-bold text-center">
-                    <h4>{availableParams[index + 1]?.type}</h4>
-                  </CCol>
-                  <CCol sm="3" md="3" className="font-weight-bold text-center">
-                    <h4>{availableParams[index + 2]?.type}</h4>
-                  </CCol>
-                  <CCol sm="3" md="3" className="font-weight-bold text-center">
-                    <h4>{availableParams[index + 3]?.type}</h4>
-                  </CCol>
-                </CRow>
-                <CRow>
-                  <CCol sm="3" md="3" className="font-weight-bold text-center">
-                    <h4>{availableParams[index]?.component}</h4>
-                  </CCol>
-                  <CCol sm="3" md="3" className="font-weight-bold text-center">
-                    <h4>{availableParams[index + 1]?.component}</h4>
-                  </CCol>
-                  <CCol sm="3" md="3" className="font-weight-bold text-center">
-                    <h4>{availableParams[index + 2]?.component}</h4>
-                  </CCol>
-                  <CCol sm="3" md="3" className="font-weight-bold text-center">
-                    <h4>{availableParams[index + 3]?.component}</h4>
-                  </CCol>
-                </CRow>
-              </Fragment>
-            )
-        )}
+        <div className="d-flex justify-content-center">
+          {availableParams.map((_, index) =>
+            index % 4 === 0
+              ? [0, 1, 2, 3].map((i) => {
+                  const paramIndex = index + i;
+                  const param = availableParams[paramIndex];
+                  return param ? (
+                    <div
+                      key={paramIndex}
+                      sm="3"
+                      md="3"
+                      className="font-weight-bold text-center m-auto"
+                    >
+                      <h5>{param.type}</h5>
+                      <h3 className="text-primary">
+                        <strong>{param.component}</strong>
+                      </h3>
+                    </div>
+                  ) : null;
+                })
+              : null
+          )}
+        </div>
       </CCardBody>
 
       <CCardFooter>
         <LiveSensorChart id_device={device.id} />
       </CCardFooter>
-      
+
       <CCardFooter>
         <MonitoredUtilityList id_device={device.id} />
       </CCardFooter>
-      
     </CCard>
   );
 };
