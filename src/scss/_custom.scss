@@ -63,3 +63,14 @@ btn-success.disabled,
 .text-info {
   color: #0066b2 !important;
 }
+
+.bg-danger,
+.btn-danger {
+  background: linear-gradient(135deg, #ff6d4d, #ca171f) !important;
+}
+
+.btn-warning,
+.bg-warning {
+  color: #193148;
+  background: linear-gradient(135deg, #e0c70e, #f4c61b) !important;
+}

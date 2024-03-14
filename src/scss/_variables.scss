@@ -20,6 +20,7 @@ thead {
 }
 
 .c-sidebar-nav {
+  background-color: #193148;
   .c-sidebar-nav-dropdown {
     .c-sidebar-nav-link {
       &:hover {
@@ -50,4 +51,8 @@ thead {
 
 .c-main {
   background-color: #ebedef;
+}
+
+.c-sidebar .c-sidebar-minimizer {
+  background-color: #1b3955 !important;
 }
