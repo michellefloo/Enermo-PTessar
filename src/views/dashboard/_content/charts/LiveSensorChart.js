@@ -26,23 +26,13 @@ const LiveSensorChart = ({ id_device }) => {
   const [chartData, setChartData] = useState(null);
   const [chartLabels, setChartLabels] = useState(null);
   const chartOptions = {
-    scales: {
-      xAxes: [
-        {
-          ticks: {
-            autoSkip: true,
-            maxTicksLimit: 10, // Maksimum label sumbu X yang akan ditampilkan
-          },
-        },
-      ],
-    },
     title: {
       display: true,
       text: "Incoming Live Data", // Judul grafik
     },
     legend: {
       display: true,
-      position: "left", // Menentukan posisi legenda
+      position: "top", // Menentukan posisi legenda
     },
   };
   useEffect(() => {
@@ -55,6 +45,7 @@ const LiveSensorChart = ({ id_device }) => {
       if (!sensorData.result) return setChartData({});
       sensorData.result.forEach((sensor) => {
         if (sensor.sensor_type_parameter in EXCLUDED_CHART_PARAM) return;
+        if (sensor.sensor_type_parameter !== "ptot") return; // hanya ambil data ptot saja
         chartData.push({
           param: sensor.sensor_type_parameter,
           label: getSensorInChartNaming(sensor.sensor_type_parameter),
