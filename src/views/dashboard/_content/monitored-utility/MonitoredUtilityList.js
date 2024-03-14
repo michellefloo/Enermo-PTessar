@@ -16,7 +16,7 @@ const MonitoredUtilityList = ({ id_device }) => {
 
   return (
     <>
-      <div className="bg-info text-lg-center font-weight-bold mt-3">
+      <div className="bg-info text-lg-center font-weight-bold mb-2">
         Monitored Utility
       </div>
       <div

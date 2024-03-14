@@ -99,8 +99,9 @@ const DeviceCardFactory = ({ device }) => {
           <Gps1 id_device={device.id} />
         </div>
       </CCardHeader>
+
       <CCardBody>
-        <div className="bg-info text-lg-center font-weight-bold">
+        <div className="bg-info text-lg-center font-weight-bold mb-3">
           This Day Total
         </div>
         {availableParams.map(
@@ -139,12 +140,15 @@ const DeviceCardFactory = ({ device }) => {
             )
         )}
       </CCardBody>
+
       <CCardFooter>
         <LiveSensorChart id_device={device.id} />
       </CCardFooter>
+      
       <CCardFooter>
         <MonitoredUtilityList id_device={device.id} />
       </CCardFooter>
+      
     </CCard>
   );
 };

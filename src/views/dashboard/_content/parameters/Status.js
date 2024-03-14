@@ -18,12 +18,16 @@ const Status = ({ id_device }) => {
     if (status === "success") {
       if (!data) return setNumberStatus(0);
       if (!data.result) return setNumberStatus(0);
+
       const resultLength = data.result.length;
+
       if (resultLength === 0) return setNumberStatus(0);
       const lastData = data.result[resultLength - 1];
       const diffTime = Number(
-        moment().diff(moment(lastData.sensors_logs.created_on), "minutes")
+        moment().diff(moment(lastData.sensors_logs[0].created_on), "minutes")
       );
+      console.log(diffTime);
+
       if (diffTime < ALERT_DIFF_STATUS_MIN) return setNumberStatus(1);
       return setNumberStatus(0);
     }
