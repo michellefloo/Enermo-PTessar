@@ -1,25 +1,25 @@
 // Variable overrides
 thead {
-  background-color: #339DFF;
+  background-color: #339dff;
   color: #fff;
 }
 
 .pagination .page-item .page-link {
-  color: #339DFF;
+  color: #339dff;
 }
 
 .pagination .page-item.active .page-link {
-    background-color: #339DFF;
-    border-color: #339DFF;
+  background-color: #339dff;
+  border-color: #339dff;
 }
 
 .card .card-header {
-  background-color: #339DFF;
-  color:#fff;
-  border-color: rgba(0, 0, 0, .125); //darken($value, 12.5%);
+  background-color: #339dff;
+  color: #fff;
+  border-color: rgba(0, 0, 0, 0.125); //darken($value, 12.5%);
 }
 
-.c-sidebar-nav{
+.c-sidebar-nav {
   .c-sidebar-nav-dropdown {
     .c-sidebar-nav-link {
       &:hover {
@@ -29,7 +29,7 @@ thead {
   }
 }
 
-.c-sidebar-nav{
+.c-sidebar-nav {
   .c-sidebar-nav-item {
     .c-sidebar-nav-link {
       &:hover {
@@ -40,9 +40,10 @@ thead {
 }
 
 .dropdown-menu {
-  .dropdown-item{
-    &:active, &:focus{
-      background-color: #339DFF;
+  .dropdown-item {
+    &:active,
+    &:focus {
+      background-color: #339dff;
     }
   }
 }

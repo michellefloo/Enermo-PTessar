@@ -23,25 +23,40 @@ const Status = ({ id_device }) => {
 
       if (resultLength === 0) return setNumberStatus(0);
       const lastData = data.result[resultLength - 1];
+
+      // Sort logs berdasarkan created_on secara descending
+      const sortedLogs = lastData.sensors_logs
+        .sort((a, b) => {
+          // Mengonversi tanggal dan waktu menjadi nilai yang dapat dibandingkan
+          // Mengurutkan secara descending berdasarkan nilai-nilai waktu
+          return (
+            moment(b.created_on).valueOf() - moment(a.created_on).valueOf()
+          );
+        })
+        .reverse();
+
+      // Ambil data array pertama setelah logs diurutkan
+      const firstLog = sortedLogs[0];
+
       const diffTime = Number(
-        moment().diff(moment(lastData.sensors_logs[0].created_on), "minutes")
+        moment().diff(moment(firstLog.created_on), "minutes")
       );
-      console.log(diffTime);
 
       if (diffTime < ALERT_DIFF_STATUS_MIN) return setNumberStatus(1);
       return setNumberStatus(0);
     }
-  }, [data, status]);
+  });
+
   if (status !== "success") return "...";
   return (
     <>
       {numbersStatus === 1 ? (
         <CBadge color="success" className="float-right">
-          &nbsp;
+          Active
         </CBadge>
       ) : (
         <CBadge color="danger" className="float-right">
-          &nbsp;
+          Inactive
         </CBadge>
       )}
     </>
