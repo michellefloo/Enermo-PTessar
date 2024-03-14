@@ -30,7 +30,7 @@ import {
                     </CCol>
                 } 
                 {rqStatus !== "loading" && 
-                    <CCol xs="12" sm="6" lg="4">
+                    <CCol xs="12" sm="6" lg="6">
                         <CWidgetIcon color="info" iconPadding={false}
                                     header={boundaryDataLength} text="boundaries" 
                                     className="font-size-large text-uppercase font-weight-bold"

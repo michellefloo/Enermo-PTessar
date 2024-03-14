@@ -1,47 +1,47 @@
-import React, { Fragment, useState, useEffect } from 'react'
-import { useGetCustomerList } from '../../../api/customer'
-import {
-    CCol,
-    CRow,
-    CWidgetIcon,
-    CSpinner
-  } from '@coreui/react'
-  import CIcon from '@coreui/icons-react'
-  import { cilBuilding } from '@coreui/icons'
+import React, { Fragment, useState, useEffect } from "react";
+import { useGetCustomerList } from "../../../api/customer";
+import { CCol, CRow, CWidgetIcon, CSpinner } from "@coreui/react";
+import CIcon from "@coreui/icons-react";
+import { cilBuilding } from "@coreui/icons";
 
-  const CustomerHeaderWidget = () => {
-    const {data: rqData, status: rqStatus} = useGetCustomerList()
-    const [utilityDataLength, setCustomerDataLength] = useState('0')
-    useEffect(() => {
-        if(rqStatus === 'success'){
-            if(!rqData)return
-            if(!rqData.result)return
-           setCustomerDataLength(rqData.result.length.toString())
-        }
-    }, [rqData, rqStatus])
-    return (
-        <Fragment>
-             <CRow>
-                {rqStatus === "loading" && 
-                    <CCol xs="12" sm="6" lg="4">
-                        <CSpinner className="spinner spinner--spacer-bottom"
-                            color="info" variant="grow"
-                        />
-                    </CCol>
-                } 
-                {rqStatus !== "loading" && 
-                    <CCol xs="12" sm="6" lg="4">
-                        <CWidgetIcon color="info" iconPadding={false}
-                                    header={utilityDataLength} text="Customers" 
-                                    className="font-size-large text-uppercase font-weight-bold"
-                        >
-                            <CIcon width={24} content={cilBuilding} />
-                        </CWidgetIcon>
-                    </CCol>
-                }         
-            </CRow>
-        </Fragment>
-    )
-}
+const CustomerHeaderWidget = () => {
+  const { data: rqData, status: rqStatus } = useGetCustomerList();
+  const [utilityDataLength, setCustomerDataLength] = useState("0");
+  useEffect(() => {
+    if (rqStatus === "success") {
+      if (!rqData) return;
+      if (!rqData.result) return;
+      setCustomerDataLength(rqData.result.length.toString());
+    }
+  }, [rqData, rqStatus]);
+  return (
+    <Fragment>
+      <CRow>
+        {rqStatus === "loading" && (
+          <CCol xs="12" sm="6" lg="4">
+            <CSpinner
+              className="spinner spinner--spacer-bottom"
+              color="info"
+              variant="grow"
+            />
+          </CCol>
+        )}
+        {rqStatus !== "loading" && (
+          <CCol xs="12" sm="6" lg="6">
+            <CWidgetIcon
+              color="info"
+              iconPadding={false}
+              header={utilityDataLength}
+              text="Customers"
+              className="font-size-large text-uppercase font-weight-bold"
+            >
+              <CIcon width={24} content={cilBuilding} />
+            </CWidgetIcon>
+          </CCol>
+        )}
+      </CRow>
+    </Fragment>
+  );
+};
 
-export default CustomerHeaderWidget
+export default CustomerHeaderWidget;
