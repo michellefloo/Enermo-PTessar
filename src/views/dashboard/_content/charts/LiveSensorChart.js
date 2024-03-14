@@ -26,13 +26,24 @@ const LiveSensorChart = ({ id_device }) => {
   const [chartData, setChartData] = useState(null);
   const [chartLabels, setChartLabels] = useState(null);
   const chartOptions = {
-    title: {
-      display: true,
-      text: "Incoming Live Data", // Judul grafik
-    },
-    legend: {
-      display: true,
-      position: "top", // Menentukan posisi legenda
+    scales: {
+      //   xAxes: [
+      //     {
+      //       ticks: {
+      //         autoSkip: true,
+      //         maxTicksLimit: 10, // Maksimum label sumbu X yang akan ditampilkan
+      //       },
+      //     },
+      //   ],
+      // },
+      title: {
+        display: true,
+        text: "Incoming Live Data", // Judul grafik
+      },
+      legend: {
+        display: true,
+        position: "top", // Menentukan posisi legenda
+      },
     },
   };
   useEffect(() => {
