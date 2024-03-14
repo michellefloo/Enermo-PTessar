@@ -1,0 +1,18 @@
+.input-feedback{
+    padding-top: 2px;
+    width: 100%;
+}
+
+.input-feedback--invalid{
+    color: red;
+}
+
+.enermo-logo-container{
+  padding-bottom: 10px;
+}
+
+.enermo-logo-container__img{
+    height: auto;
+    min-width: 150px;
+    width: 165px;
+}

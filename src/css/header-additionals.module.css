@@ -1,0 +1,12 @@
+.p--adjustment{
+    padding-top: 14px;
+}
+
+.p--adjustment__subplan-space{
+    padding-left: 3px;
+}
+
+.p--adjustment__subplan-font--blue{
+    font-weight: bold;
+    color:blue
+}

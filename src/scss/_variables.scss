@@ -1,0 +1,52 @@
+// Variable overrides
+thead {
+  background-color: #339DFF;
+  color: #fff;
+}
+
+.pagination .page-item .page-link {
+  color: #339DFF;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #339DFF;
+    border-color: #339DFF;
+}
+
+.card .card-header {
+  background-color: #339DFF;
+  color:#fff;
+  border-color: rgba(0, 0, 0, .125); //darken($value, 12.5%);
+}
+
+.c-sidebar-nav{
+  .c-sidebar-nav-dropdown {
+    .c-sidebar-nav-link {
+      &:hover {
+        background-color: #0084ff;
+      }
+    }
+  }
+}
+
+.c-sidebar-nav{
+  .c-sidebar-nav-item {
+    .c-sidebar-nav-link {
+      &:hover {
+        background-color: #0084ff;
+      }
+    }
+  }
+}
+
+.dropdown-menu {
+  .dropdown-item{
+    &:active, &:focus{
+      background-color: #339DFF;
+    }
+  }
+}
+
+.c-main {
+  background-color: #ebedef;
+}
