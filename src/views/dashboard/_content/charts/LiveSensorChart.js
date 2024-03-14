@@ -36,15 +36,16 @@ const LiveSensorChart = ({ id_device }) => {
         },
       ],
     },
-    title: {
-      display: true,
-      text: "Incoming Live Data", // Judul grafik
-    },
     legend: {
       display: true,
       position: "left", // Menentukan posisi legenda
+      labels: {
+        fontColor: "#555", // Warna label legenda
+        fontSize: 12,
+      },
     },
   };
+
   useEffect(() => {
     // console.log("id" + id_device);
     // console.log("start" + deviceMonitorTime.start);
@@ -100,6 +101,9 @@ const LiveSensorChart = ({ id_device }) => {
   if (!chartData) return <BigSPinner />;
   return (
     <>
+      <div className="bg-info text-lg-center font-weight-bold mb-3">
+        Incoming Live Data
+      </div>
       <CRow>
         <CCol>
           <CChartLine
@@ -109,9 +113,6 @@ const LiveSensorChart = ({ id_device }) => {
           />
         </CCol>
       </CRow>
-      {/* <div className="bg-info text-lg-center font-weight-bold">
-        Incoming Live Data
-      </div> */}
     </>
   );
 };
