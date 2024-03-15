@@ -4,10 +4,7 @@ import axios from "src/utils/axios";
 import axiosNew from "axios";
 import moment from "moment";
 import { DATE_ISO8601 } from "src/utils/constant";
-import {
-  useGetSensorByIddDeviceList,
-  useGetSensorTypeSelectList,
-} from "../api/sensor";
+import { useGetSensorByIddDeviceList } from "../api/sensor";
 
 export const useGetKwhAvg = (id_device, id_sensor, startUnix, endUnix) => {
   const { data: sensorData } = useGetSensorByIddDeviceList(id_device);
@@ -55,6 +52,33 @@ export const useGetDeviceMonitoring = (
         const { data } = response || {};
         if (!data) return [];
         return data;
+      },
+    }
+  );
+
+  return { data, status };
+};
+
+export const useGetLocationMonitoring = (
+  id_device,
+  startUnix,
+  endUnix,
+  types
+) => {
+  const { data, status } = useFecth(
+    apiRoutes.getLocationMonitoring,
+    {
+      id: String(id_device),
+      start_date: String(startUnix),
+      end_date: String(endUnix),
+      types: ["londata", "latdata"],
+    },
+    {
+      queryKey: ["locationMonitoring", id_device, startUnix, endUnix, types],
+      select: (response) => {
+        const { data } = response || {};
+        if (!data) return null;
+        return data || null;
       },
     }
   );

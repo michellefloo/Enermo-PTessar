@@ -101,7 +101,10 @@ const DeviceCardFactory = ({ device }) => {
       </CCardHeader>
 
       <CCardBody>
-        <div className="bg-dark text-lg-center font-weight-bold mb-2 p-1 rounded">
+        <div
+          className="bg-dark text-lg-center font-weight-bold mb-2 p-1 rounded"
+          style={{ textAlign: "center" }}
+        >
           This Day Total
         </div>
         <div className="d-flex justify-content-center">

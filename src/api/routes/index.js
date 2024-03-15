@@ -58,6 +58,9 @@ const apiRoutes = {
   getDeviceMonitoringNew: "/landlord/sensor/device/v3/monitoring",
   getDeviceMonitoring: "/landlord/sensor/device/monitoring",
 
+  // Location Monitoring
+  getLocationMonitoring: "/landlord/sensor/device/monitoring/location",
+
   getDeviceGroupList: "/landlord/sensor/device/group/list",
   addDeviceGroup: "/landlord/sensor/device/group/insert",
   updateDeviceGroup: "/landlord/sensor/device/group/edit",

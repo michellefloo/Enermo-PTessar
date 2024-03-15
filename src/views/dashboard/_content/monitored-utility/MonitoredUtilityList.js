@@ -16,7 +16,10 @@ const MonitoredUtilityList = ({ id_device }) => {
 
   return (
     <>
-      <div className="bg-dark text-lg-center font-weight-bold p-1">
+      <div
+        className="bg-dark text-lg-center font-weight-bold p-1"
+        style={{ textAlign: "center" }}
+      >
         Monitored Utility
       </div>
       <div

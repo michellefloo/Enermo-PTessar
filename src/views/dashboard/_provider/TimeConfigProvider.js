@@ -16,15 +16,19 @@ const TimeConfigProvider = ({ children }) => {
     start: moment().startOf("day").unix(),
     end: moment().endOf("day").unix(),
   });
+  const [locationMonitorTime, setlocationMonitorTime] = useState({
+    start: moment().subtract(10, "minutes").unix(), // 10 menit terakhir
+    end: moment().unix(),
+  });
 
   // Menggunakan setTimeout untuk memperbarui waktu pemantauan perangkat dan waktu mulai hari setiap 5 menit (300000 milidetik)
   setTimeout(() => {
-    // Memperbarui waktu pemantauan perangkat untuk 15 menit yang lalu hingga saat ini
+    // Memperbarui waktu pemantauan perangkat dari awal hari (00:00 AM) hingga akhir hari (23:59 PM)
     setDeviceMonitorTime({
       start: moment().startOf("day").unix(),
       end: moment().endOf("day").unix(),
     });
-    // Memperbarui waktu mulai hari menjadi saat ini hingga saat ini
+    // Memperbarui waktu pemantauan perangkat dari awal hari (00:00 AM) hingga akhir hari (23:59 PM)
     setFromStartToday({
       start: moment().startOf("day").unix(),
       end: moment().endOf("day").unix(),
@@ -40,6 +44,8 @@ const TimeConfigProvider = ({ children }) => {
         setDeviceMonitorTime,
         fromStartToday,
         setFromStartToday,
+        locationMonitorTime,
+        setlocationMonitorTime,
       }}
     >
       {children}

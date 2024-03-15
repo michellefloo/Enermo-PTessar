@@ -14,40 +14,33 @@ const Status = ({ id_device }) => {
     deviceMonitorTime.end
   );
   const [numbersStatus, setNumberStatus] = useState(0);
+
   useEffect(() => {
     if (status === "success") {
       if (!data) return setNumberStatus(0);
       if (!data.result) return setNumberStatus(0);
 
       const resultLength = data.result.length;
-
       if (resultLength === 0) return setNumberStatus(0);
+
       const lastData = data.result[resultLength - 1];
 
-      // Sort logs berdasarkan created_on secara descending
-      const sortedLogs = lastData.sensors_logs
-        .sort((a, b) => {
-          // Mengonversi tanggal dan waktu menjadi nilai yang dapat dibandingkan
-          // Mengurutkan secara descending berdasarkan nilai-nilai waktu
-          return (
-            moment(b.created_on).valueOf() - moment(a.created_on).valueOf()
-          );
-        })
-        .reverse();
-
-      // Ambil data array pertama setelah logs diurutkan
-      const firstLog = sortedLogs[0];
+      // Pastikan sensors_logs memiliki setidaknya satu entri
+      if (!lastData.sensors_logs || lastData.sensors_logs.length === 0) {
+        return setNumberStatus(0);
+      }
 
       const diffTime = Number(
-        moment().diff(moment(firstLog.created_on), "minutes")
+        moment().diff(moment(lastData.sensors_logs[0].created_on), "minutes")
       );
-
+      console.log(diffTime);
       if (diffTime < ALERT_DIFF_STATUS_MIN) return setNumberStatus(1);
       return setNumberStatus(0);
     }
-  });
+  }, [data, status]);
 
   if (status !== "success") return "...";
+
   return (
     <>
       {numbersStatus === 1 ? (

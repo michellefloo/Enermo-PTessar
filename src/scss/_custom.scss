@@ -1,4 +1,17 @@
-// Here you can add other styles
+// @media (min-width: 576px) {
+//   .header-widget-devices,
+//   .header-widget-sensor,
+//   .header-widget-utility,
+//   .header-widget-boundary,
+//   .header-widget-customers,
+//   .header-widget-device-group,
+//   .header-widget-device-history,
+//   .header-widget-device-installation {
+//     flex: 0 0 70%;
+//     max-width: 70%;
+//   }
+// }
+
 .c-sidebar .c-sidebar-brand {
   color: white;
   background: white;
@@ -28,6 +41,8 @@
 .btn-info,
 .bg-info,
 .badge-info {
+  background-color: #134777;
+  border-color: #134777;
   background-image: linear-gradient(
     45deg,
     hsl(215deg 64% 17%) 0%,
@@ -41,6 +56,10 @@
     hsl(213deg 57% 23%) 89%,
     hsl(213deg 56% 23%) 100%
   );
+}
+
+.btn-info:hover {
+  color: #9bbcdb;
 }
 
 btn-success.disabled,
