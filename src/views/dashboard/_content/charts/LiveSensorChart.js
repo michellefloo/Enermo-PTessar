@@ -106,7 +106,7 @@ const LiveSensorChart = ({ id_device }) => {
   if (!chartData) return <BigSPinner />;
   return (
     <>
-      <div className="bg-dark text-lg-center font-weight-bold mb-2 p-1 rounded">
+      <div className="thead text-lg-center font-weight-bold mb-2 p-1 rounded">
         Incoming Live Data
       </div>
       <CRow>

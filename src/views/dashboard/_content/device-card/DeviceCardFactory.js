@@ -8,8 +8,6 @@ import {
   CCardHeader,
   CCardBody,
   CCardFooter,
-  CRow,
-  CCol,
   CBadge,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
@@ -101,9 +99,9 @@ const DeviceCardFactory = ({ device }) => {
       </CCardHeader>
 
       <CCardBody>
-        <div className="bg-dark text-lg-center font-weight-bold mb-2 p-1 rounded">
+        <p className="thead text-lg-center font-weight-bold mb-2">
           This Day Total
-        </div>
+        </p>
         <div className="d-flex justify-content-center">
           {availableParams.map((_, index) =>
             index % 4 === 0
