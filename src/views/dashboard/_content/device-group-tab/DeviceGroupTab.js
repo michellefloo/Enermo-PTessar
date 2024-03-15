@@ -6,7 +6,6 @@ import {
   CTabContent,
   CTabPane,
   CTabs,
-  CAlert,
 } from "@coreui/react";
 import { useGetDeviceGroupList } from "src/api/device-group";
 import DeviceCard from "../device-card/DeviceCard";
