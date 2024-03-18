@@ -19,6 +19,7 @@ const CycleActivePower = ({ device, param }) => {
   const [cycleDetail, setCycleDetail] = useState([]);
 
   useEffect(() => {
+    console.log(data);
     if (status === "success" && sensorDataStatus === "success") {
       if (!data || !data.result || !sensorData || !sensorData.result)
         return setNumberEdelCycle("-");

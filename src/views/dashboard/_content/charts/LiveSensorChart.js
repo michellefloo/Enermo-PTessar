@@ -107,7 +107,7 @@ const LiveSensorChart = ({ id_device }) => {
   return (
     <>
       <div
-        className="bg-dark text-lg-center font-weight-bold mb-2 p-1 rounded"
+        className="thead text-lg-center font-weight-bold mb-2"
         style={{ textAlign: "center" }}
       >
         Incoming Live Data
