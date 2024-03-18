@@ -72,13 +72,22 @@ const LiveSensorChart = ({ id_device }) => {
     if (status === "success" && data && data.result) {
       if (!data) return setChartData({});
       if (!data.result) return setChartData({});
-      const logs = data.result[0].sensors_logs;
-      const filteredLogs = logs.filter((log) =>
-        moment
-          .unix(log.time_unix)
-          .isSame(moment.unix(deviceMonitorTime.end), "day")
-      );
 
+      const logs = data.result[0].sensors_logs;
+      const filteredLogs = logs
+        // Memeriksa apakah waktu log sama dengan waktu akhir pemantauan perangkat (dalam format UNIX) pada hari yang sama
+        .filter((log) =>
+          moment
+            .unix(log.time_unix)
+            .isSame(moment.unix(deviceMonitorTime.end), "day")
+        )
+        // Urutkan logs berdasarkan created on secara ASC
+        .sort(
+          (a, b) =>
+            // Menggunakan fungsi moment untuk mengonversi waktu pembuatan log menjadi nilai waktu dalam milidetik
+            // Kemudian logs diurutkan berdasarkan nilai waktu tersebut secara ascending (nilai waktu yang lebih rendah berada di bagian depan)
+            moment(a.created_on).valueOf() - moment(b.created_on).valueOf()
+        );
       if (!filteredLogs) return setChartData({});
 
       const valueByParam = {};
