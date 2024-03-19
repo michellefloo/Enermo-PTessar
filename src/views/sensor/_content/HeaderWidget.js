@@ -20,28 +20,33 @@ import {
         }
     }, [rqData, rqStatus])
     return (
-        <Fragment>
-             <CRow>
-                {rqStatus === "loading" && 
-                    <CCol xs="12" sm="6" lg="4">
-                        <CSpinner className="spinner spinner--spacer-bottom"
-                            color="info" variant="grow"
-                        />
-                    </CCol>
-                } 
-                {rqStatus !== "loading" && 
-                    <CCol xs="12" sm="6" lg="6">
-                        <CWidgetIcon color="info" iconPadding={false}
-                                    header={utilityDataLength} text="Sensors" 
-                                    className="font-size-large text-uppercase font-weight-bold"
-                        >
-                            <CIcon width={24} content={cilAudio} />
-                        </CWidgetIcon>
-                    </CCol>
-                }         
-            </CRow>
-        </Fragment>
-    )
+      <Fragment>
+        <CRow>
+          {rqStatus === "loading" && (
+            <CCol xs="12" sm="6" lg="4">
+              <CSpinner
+                className="spinner spinner--spacer-bottom"
+                color="info"
+                variant="grow"
+              />
+            </CCol>
+          )}
+          {rqStatus !== "loading" && (
+            <CCol xs="12" sm="6" lg="6" style={{ minWidth: "200px" }}>
+              <CWidgetIcon
+                color="info"
+                iconPadding={false}
+                header={utilityDataLength}
+                text="Sensors"
+                className="font-size-large text-uppercase font-weight-bold"
+              >
+                <CIcon width={24} content={cilAudio} />
+              </CWidgetIcon>
+            </CCol>
+          )}
+        </CRow>
+      </Fragment>
+    );
 }
 
 export default SensorHeaderWidget

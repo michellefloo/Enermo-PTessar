@@ -1,11 +1,11 @@
-.cardbutton{
-    background-color:rgb(60,75,100, 1.0);
-    text-align: center;
-    color: white;
-    height: 200px;
-    font-weight: bold;
-    font-size: 20pt;
-    &:hover{
-        background-color: #339DFF;
-    }
+.cardbutton {
+  background: linear-gradient(45deg, #3c4b64 0%, #212333 100%);
+  text-align: center;
+  color: white;
+  height: 200px;
+  font-weight: bold;
+  font-size: 20pt;
+  &:hover {
+    background: #0066b2;
+  }
 }

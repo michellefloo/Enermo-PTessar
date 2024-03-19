@@ -54,7 +54,7 @@ const UserManegementHeaderCounter = () => {
           <CIcon width={24} content={cilLockLocked} />
         </CWidgetIcon>
       </CCol>
-      <CCol xs="12" sm="6" lg="4">
+      <CCol xs="12" sm="6" lg="4" style={{ minWidth: "195px" }}>
         <CWidgetIcon
           header={String(rqDataUserManUnverifiedCount)}
           text="Unverified User(s)"

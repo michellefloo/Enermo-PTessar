@@ -27,7 +27,7 @@ const CustomerHeaderWidget = () => {
           </CCol>
         )}
         {rqStatus !== "loading" && (
-          <CCol xs="12" sm="6" lg="6">
+          <CCol xs="12" sm="6" lg="6" style={{ minWidth: "250px" }}>
             <CWidgetIcon
               color="info"
               iconPadding={false}

@@ -9,7 +9,7 @@ const DeviceInstallationHeaderWidget = () => {
   return (
     <Fragment>
       <CRow>
-        <CCol xs="12" sm="6" lg="6">
+        <CCol xs="12" sm="6" lg="6" style={{ minWidth: "200px" }}>
           <CWidgetIcon
             color="info"
             iconPadding={false}
