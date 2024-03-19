@@ -41,13 +41,15 @@ const CycleActivePower = ({ device, param }) => {
 
       // Simpan detail siklus per hari
       const cycleDetailArr = [];
+      let i = 1;
       cycleCountData.forEach((cycle) => {
         cycleDetailArr.push({
-          cycle: cycle.cycle,
+          cycle: i,
           start_time: cycle.start_time,
           end_time: cycle.end_time,
           duration: cycle.duration,
         });
+        i++;
       });
 
       setNumberEdelCycle(totalCycle);
