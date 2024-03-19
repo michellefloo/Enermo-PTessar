@@ -1,12 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useGetSensorByIddDeviceList } from "src/api/sensor";
-import {
-  useGetDeviceMonitoring,
-  useGetLocationMonitoring,
-} from "../../../../api/dashboard";
+import { useGetLocationMonitoring } from "../../../../api/dashboard";
 import { TimeConfigProviderContext } from "../../_provider/TimeConfigProvider";
 import CIcon from "@coreui/icons-react";
-import { cilLocationPin } from "@coreui/icons";
+import { cilLocationPin, cilXCircle } from "@coreui/icons";
 
 export const Gps1 = ({ id_device, types }) => {
   const { locationMonitorTime } = useContext(TimeConfigProviderContext);
@@ -24,23 +21,20 @@ export const Gps1 = ({ id_device, types }) => {
       if (!data) return;
       if (!data.result) return;
       if (data.result.length === 0) return;
-      console.log(data.result);
       const filteredLatData = data.result[0].locations_sensors.lat;
-      //   const lastLatData = filteredLatData[filteredLatData.length - 1];
       const filteredLonData = data.result[0].locations_sensors.lon;
-      //   const lastLonData = filteredLonData[filteredLonData.length - 1];
-      if (!filteredLatData) return;
-      if (!filteredLonData) return;
+      if (!filteredLatData || filteredLatData === 0) return;
+      if (!filteredLonData || filteredLonData === 0) return;
       setGpsCoordinate({
-        lat: filteredLatData.value,
-        lon: filteredLonData.value,
+        lat: filteredLatData,
+        lon: filteredLonData,
       });
     }
   }, [data, status, sensorStatus, sensorData]);
   return (
     <>
       <CIcon
-        content={cilLocationPin}
+        content={gpsCoordinate ? cilLocationPin : cilXCircle}
         className={gpsCoordinate ? "text-success" : "text-muted"}
         style={{
           cursor: gpsCoordinate ? "pointer" : "default",
