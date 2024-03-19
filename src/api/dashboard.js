@@ -86,6 +86,33 @@ export const useGetLocationMonitoring = (
   return { data, status };
 };
 
+export const useGetDeviceMonitoringNotLive = (
+  id_device,
+  param,
+  startUnix,
+  endUnix
+) => {
+  const { data, status } = useFecth(
+    apiRoutes.getDeviceMonitoringNew,
+    {
+      id: id_device,
+      start_date: String(startUnix),
+      end_date: String(endUnix),
+      type: "ptot",
+    },
+    {
+      queryKey: ["deviceMonitoring", id_device, startUnix, endUnix],
+      select: (response) => {
+        const { data } = response || {};
+        if (!data) return [];
+        return data;
+      },
+    }
+  );
+
+  return { data, status };
+};
+
 // export const useGetDeviceMonitoringByDate = (id_device, startUnix, endUnix) => {
 //   const { data, status } = useFecth(
 //     apiRoutes.getDeviceMonitoringNew,
