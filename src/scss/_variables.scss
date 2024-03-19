@@ -56,3 +56,10 @@ thead {
 .c-sidebar .c-sidebar-minimizer {
   background-color: #1b3955 !important;
 }
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  color: #768192;
+  background-color: #ebedef;
+  border-color: #c4c9d0 !important;
+}
