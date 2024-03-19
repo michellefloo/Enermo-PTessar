@@ -18,8 +18,8 @@ const DeviceCard = ({ devices }) => {
         }
       });
       if (tempDeviceArr.length > 0) {
-        setDeviceArr([tempDeviceArr[1]]); // Hanya tambahkan data pertama
-        // setDeviceArr(tempDeviceArr); // Munculkan semua data
+        // setDeviceArr([tempDeviceArr[1]]); // Hanya tambahkan data pertama
+        setDeviceArr(tempDeviceArr); // Munculkan semua data
       }
     }
   }, [status]);
