@@ -59,7 +59,7 @@ const ActionButtonSlot = (props) => {
           block
           onClick={() => toggleDeviceSummaryDetail(data)}
         >
-          <CIcon content={cilChart} /> Detail
+          <CIcon content={cilChart} />
         </CButton>
       </div>
     </CContainer>
