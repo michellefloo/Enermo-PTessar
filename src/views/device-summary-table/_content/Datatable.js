@@ -57,9 +57,11 @@ const ActionButtonSlot = (props) => {
         <CButton
           color="info"
           block
+          className="d-flex align-items-center"
           onClick={() => toggleDeviceSummaryDetail(data)}
         >
           <CIcon content={cilChart} />
+          <span>&nbsp;Detail</span>
         </CButton>
       </div>
     </CContainer>
