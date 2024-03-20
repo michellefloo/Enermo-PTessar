@@ -13,6 +13,8 @@ import {
   CDropdownItem,
   CInputCheckbox,
   CInput,
+  CButton,
+  CContainer,
 } from "@coreui/react";
 
 import { useHistory } from "react-router-dom";
@@ -49,24 +51,18 @@ const SelectionSlot = (props) => {
 
 const ActionButtonSlot = (props) => {
   const { toggleDeviceSummaryDetail, data } = props;
-  if (!data._last) return <></>;
   return (
-    <td>
-      <CDropdown>
-        <CDropdownToggle size="sm" />
-        <CDropdownMenu>
-          <CDropdownItem onClick={() => toggleDeviceSummaryDetail(data)}>
-            <CRow>
-              <CCol>Detail Summary Device</CCol>
-              <CCol className="ml-5">
-                &nbsp;&nbsp;
-                <CIcon content={cilChart} />
-              </CCol>
-            </CRow>
-          </CDropdownItem>
-        </CDropdownMenu>
-      </CDropdown>
-    </td>
+    <CContainer className="d-flex justify-content-end" fluid>
+      <div className="p-1">
+        <CButton
+          color="info"
+          block
+          onClick={() => toggleDeviceSummaryDetail(data)}
+        >
+          <CIcon content={cilChart} /> Detail
+        </CButton>
+      </div>
+    </CContainer>
   );
 };
 
@@ -88,12 +84,9 @@ const DeviceSummaryDataTable = (id_device) => {
     history.push({
       pathname: "/dashboard",
       state: {
-        device_id: data.result[0].id,
-        device_name: data.result[0].device_desc,
-        device_desc: data.result[0].device_name,
-        customer_id: data.result[0].id_main_customer,
-        cycle: data.result[0].cycle_count_summarys[0].cycle,
-        status: data.status,
+        device_id: data.id,
+        device: data,
+        device_name: data.device_desc,
       },
     });
   };
