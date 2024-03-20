@@ -48,6 +48,7 @@
   color: #9bbcdb;
 }
 
+.btn-success,
 btn-success.disabled,
 .btn-success:disabled {
   background-image: linear-gradient(
@@ -72,6 +73,12 @@ btn-success.disabled,
 .bg-danger,
 .btn-danger {
   background: linear-gradient(135deg, #ff6d4d, #ca171f) !important;
+}
+
+.bg-danger:hover,
+.btn-danger:hover {
+  background: #ca171f;
+  transition: background-color 0.3s ease;
 }
 
 .btn-warning,

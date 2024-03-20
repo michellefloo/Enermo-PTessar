@@ -62,7 +62,7 @@ const LiveSensorChart = ({ id_device }) => {
       if (!sensorData.result) return setChartData({});
       sensorData.result.forEach((sensor) => {
         if (sensor.sensor_type_parameter in EXCLUDED_CHART_PARAM) return;
-        if (sensor.sensor_type_parameter !== "ptot") return; // hanya show data dan legend ptot saja
+        // if (sensor.sensor_type_parameter !== "ptot") return; // hanya show data dan legend ptot saja
         chartData.push({
           param: sensor.sensor_type_parameter,
           label: getSensorInChartNaming(sensor.sensor_type_parameter),

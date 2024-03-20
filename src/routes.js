@@ -12,6 +12,7 @@ const DeviceGroup = React.lazy(() => import('./views/device-group/DeviceGroup'))
 const Customer = React.lazy(() => import('./views/customers/Customer'));
 const Settings = React.lazy(() => import('./views/settings/Settings'));
 const DeviceHistoryChart = React.lazy(() => import('./views/device-history-chart/'));
+const DeviceSummaryTable = React.lazy(() => import('./views/device-summary-table/DeviceSummaryTable'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -27,6 +28,8 @@ const routes = [
   { path: "/user/management", name: "User Management", component: UserManagement },
   { path: "/settings", name: "Settings", component: Settings },
   { path: "/device/history/chart", name: "Device History Chart", component: DeviceHistoryChart },
+  { path: "/device/summary", name: "Device Summary Table", component: DeviceSummaryTable },
+
 ];
 
 export default routes;
