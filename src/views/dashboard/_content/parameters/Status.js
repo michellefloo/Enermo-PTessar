@@ -19,11 +19,9 @@ const Status = ({ id_device }) => {
     if (status === "success") {
       if (!data) return setNumberStatus(0);
       if (!data.result) return setNumberStatus(0);
+      if (data.result.length === 0) return setNumberStatus(0);
 
-      const resultLength = data.result.length;
-      if (resultLength === 0) return setNumberStatus(0);
-
-      const lastData = data.result[resultLength - 1];
+      const lastData = data.result[data.result.length - 1];
 
       // Pastikan sensors_logs memiliki setidaknya satu entri
       if (!lastData.sensors_logs || lastData.sensors_logs.length === 0) {

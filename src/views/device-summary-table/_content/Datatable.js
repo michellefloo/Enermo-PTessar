@@ -117,9 +117,10 @@ const DeviceSummaryDataTable = (id_device) => {
     { key: "selection", label: "", filter: false, _style: { width: "2%" } },
     { key: "id_main_customer", label: "Customer ID", _style: { width: "15%" } },
     { key: "device_desc", label: "Device Name", _style: { width: "15%" } },
-    { key: "device_name", label: "Device Code", _style: { width: "15%" } },
-    { key: "status", label: "Status", _style: { width: "15%" } },
+    { key: "device_name", label: "Device Code", _style: { width: "10%" } },
+    { key: "status", label: "Status", _style: { width: "10%" } },
     { key: "cycle", label: "Cycle", _style: { width: "15%" } },
+    { key: "billing", label: "Billing", _style: { width: "15%" } },
     { key: "action", label: "Action", filter: false, _style: { width: "10%" } },
   ];
 
@@ -156,6 +157,7 @@ const DeviceSummaryDataTable = (id_device) => {
         { key: "device_name", label: "Device Code" },
         { key: "status", label: "Status" },
         { key: "cycle", label: "Cycle" },
+        { key: "billing", label: "Billing" },
       ],
       data: deviceData,
       fileName: "Device List",
