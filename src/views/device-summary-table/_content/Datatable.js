@@ -4,13 +4,7 @@ import { useGetDeviceList } from "../../../api/device";
 import CIcon from "@coreui/icons-react";
 import { cilChart } from "@coreui/icons";
 import {
-  CCol,
-  CRow,
   CDataTable,
-  CDropdown,
-  CDropdownToggle,
-  CDropdownMenu,
-  CDropdownItem,
   CInputCheckbox,
   CInput,
   CButton,
@@ -52,19 +46,21 @@ const SelectionSlot = (props) => {
 const ActionButtonSlot = (props) => {
   const { toggleDeviceSummaryDetail, data } = props;
   return (
-    <CContainer className="d-flex justify-content-end" fluid>
-      <div className="p-1">
-        <CButton
-          color="info"
-          block
-          className="d-flex align-items-center"
-          onClick={() => toggleDeviceSummaryDetail(data)}
-        >
-          <CIcon content={cilChart} />
-          <span>&nbsp;Detail</span>
-        </CButton>
-      </div>
-    </CContainer>
+    <td>
+      <CContainer className="d-flex justify-content-end" fluid>
+        <div className="p-1">
+          <CButton
+            color="info"
+            block
+            className="d-flex align-items-center"
+            onClick={() => toggleDeviceSummaryDetail(data)}
+          >
+            <CIcon content={cilChart} />
+            <span>&nbsp;Detail</span>
+          </CButton>
+        </div>
+      </CContainer>
+    </td>
   );
 };
 
@@ -85,6 +81,7 @@ const DeviceSummaryDataTable = (id_device) => {
   const handleDeviceSummaryTable = (data) => {
     history.push({
       pathname: "/dashboard",
+      // pathname: "/device/summary/chart",
       state: {
         device_id: data.id,
         device: data,
