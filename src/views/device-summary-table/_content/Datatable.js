@@ -85,7 +85,8 @@ const DeviceSummaryDataTable = () => {
 
   const handleDeviceSummaryTable = (data) => {
     history.push({
-      pathname: "/dashboard",
+      // pathname: "/dashboard",
+      pathname: "/device/realtime/summary/chart",
       state: {
         device_id: data.id,
         device: data,
@@ -142,7 +143,7 @@ const DeviceSummaryDataTable = () => {
       if (!rqData.result) return;
       setSelectedId(rqData.result[0].id);
     }
-    console.log("🚀 ~ useEffect ~ rqData.result.id:", rqData?.result?.id); // undefined
+    // console.log("🚀 ~ useEffect ~ rqData.result.id:", rqData?.result?.id); // undefined
   }, [rqData, rqStatus]);
 
   useEffect(() => {
