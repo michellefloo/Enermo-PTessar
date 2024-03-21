@@ -20,6 +20,7 @@ const DeviceSummaryTable = () => {
           <Datatable />
         </CCardBody>
       </CCard>
+      <DeviceErrorHandler />
     </Fragment>
   );
 };
