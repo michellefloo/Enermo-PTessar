@@ -1,12 +1,12 @@
 import React from "react";
-import DeviceHistoryChartProvider from "./_provider/DeviceHistoryChartProvider";
+import DeviceSummaryChartProvider from "./_provider/DeviceSummaryChartProvider";
 import DeviceSummaryChart from "./DeviceSummaryChart";
 
 const Dashboard = () => {
   return (
-    <DeviceHistoryChartProvider>
+    <DeviceSummaryChartProvider>
       <DeviceSummaryChart />
-    </DeviceHistoryChartProvider>
+    </DeviceSummaryChartProvider>
   );
 };
 

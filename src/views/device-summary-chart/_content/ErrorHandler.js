@@ -1,6 +1,6 @@
 import { useEffect, useContext } from "react";
 import { useDispatch } from "react-redux";
-import { DeviceHistoryContext } from "../_provider/DeviceHistoryChartProvider";
+import { DeviceHistoryContext } from "../_provider/DeviceSummaryChartProvider";
 
 const HistoryDeviceErrorHandler = () => {
   const dispatch = useDispatch();

@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 
 export const DeviceHistoryContext = createContext();
 
-const DeviceHistoryChartProvider = ({ children }) => {
+const DeviceSummaryChartProvider = ({ children }) => {
   const location = useLocation();
   const [selectedDevice] = useState({
     id: location.state ? location.state.device_id : -1,
@@ -29,4 +29,4 @@ const DeviceHistoryChartProvider = ({ children }) => {
     </DeviceHistoryContext.Provider>
   );
 };
-export default DeviceHistoryChartProvider;
+export default DeviceSummaryChartProvider;

@@ -2,7 +2,7 @@ import React, { Fragment, useContext } from "react";
 import { CCol, CRow, CWidgetIcon } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import { cilBolt } from "@coreui/icons";
-import { DeviceHistoryContext } from "../_provider/DeviceHistoryChartProvider";
+import { DeviceHistoryContext } from "../_provider/DeviceSummaryChartProvider";
 
 const DeviceSummaryChartHeaderWidget = () => {
   const { selectedDevice } = useContext(DeviceHistoryContext);

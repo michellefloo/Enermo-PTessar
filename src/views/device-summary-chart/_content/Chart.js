@@ -14,7 +14,7 @@ import {
   EXCLUDED_CHART_PARAM,
 } from "../../../utils/constant";
 import { getSensorInChartNaming } from "../../../utils/helpers";
-import { DeviceHistoryContext } from "../_provider/DeviceHistoryChartProvider";
+import { DeviceHistoryContext } from "../_provider/DeviceSummaryChartProvider";
 import { TimeConfigProviderContext } from "src/views/dashboard/_provider/TimeConfigProvider";
 
 const LiveSensorChart = () => {
