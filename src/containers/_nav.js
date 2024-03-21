@@ -32,8 +32,8 @@ const _nav = [
       },
       {
         _tag: "CSidebarNavItem",
-        name: "Device Summary List",
-        to: "/device/summary",
+        name: "Device Realtime Summary",
+        to: "/device/realtime/summary",
       },
     ],
   },

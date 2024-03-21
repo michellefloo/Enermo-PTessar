@@ -64,24 +64,28 @@ const ActionButtonSlot = (props) => {
   );
 };
 
-const DeviceSummaryDataTable = (id_device) => {
+const DeviceSummaryDataTable = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+
   const { data: rqData, status: rqStatus } = useGetDeviceList();
-  // const { deviceMonitorTime } = useContext(TimeConfigProviderContext);
-  // const { data: rqData, status: rqStatus } = useGetDeviceMonitoring(
-  //   id_device,
-  //   null,
-  //   deviceMonitorTime.start,
-  //   deviceMonitorTime.end
-  // );
+  console.log("🚀 ~ DeviceSummaryDataTable ~ rqData:", rqData);
   const [deviceData, setDeviceData] = useState([]);
-  const [isSelecAllSelected, setSelecAllSelected] = useState(false);
+  const [selectedId, setSelectedId] = useState(null);
+  const { deviceMonitorTime } = useContext(TimeConfigProviderContext);
+  console.log("🚀 ~ DeviceSummaryDataTable ~ selectedId:", selectedId); // 126
+  const [isSelectAllSelected, setSelectAllSelected] = useState(false);
+
+  const { data, status } = useGetDeviceMonitoring(
+    selectedId,
+    null,
+    deviceMonitorTime && deviceMonitorTime.start,
+    deviceMonitorTime && deviceMonitorTime.end
+  );
 
   const handleDeviceSummaryTable = (data) => {
     history.push({
       pathname: "/dashboard",
-      // pathname: "/device/summary/chart",
       state: {
         device_id: data.id,
         device: data,
@@ -91,7 +95,7 @@ const DeviceSummaryDataTable = (id_device) => {
   };
 
   const handleSelectAll = (isSelected) => {
-    setSelecAllSelected(isSelected);
+    setSelectAllSelected(isSelected);
     setDeviceData((currentData) => {
       return currentData.map((d) => ({ ...d, _checked: isSelected }));
     });
@@ -136,8 +140,9 @@ const DeviceSummaryDataTable = (id_device) => {
     if (rqStatus === "success") {
       if (!rqData) return;
       if (!rqData.result) return;
-      setDeviceData(rqData.result);
+      setSelectedId(rqData.result[0].id);
     }
+    console.log("🚀 ~ useEffect ~ rqData.result.id:", rqData?.result?.id); // undefined
   }, [rqData, rqStatus]);
 
   useEffect(() => {
@@ -171,7 +176,7 @@ const DeviceSummaryDataTable = (id_device) => {
     if (isFilterEmpty) {
       setDeviceData(rqData.result);
     }
-    if (isSelecAllSelected) {
+    if (isSelectAllSelected) {
       handleSelectAll(true);
     }
   };
