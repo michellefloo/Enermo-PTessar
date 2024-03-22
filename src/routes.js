@@ -21,7 +21,7 @@ const DeviceHistoryChart = React.lazy(() =>
   import("./views/device-history-chart/")
 );
 const DeviceSummaryTable = React.lazy(() =>
-  import("./views/device-summary-table/DeviceSummaryTable")
+  import("./views/device-summary-table/")
 );
 const DeviceSummaryChart = React.lazy(() =>
   import("./views/device-summary-chart/")
@@ -75,7 +75,7 @@ const routes = [
   },
   {
     path: "/device/realtime/summary/chart",
-    name: "Device Summary Chart",
+    name: "Device Realtime Summary Chart",
     component: DeviceSummaryChart,
   },
   {

@@ -14,6 +14,8 @@ import { useHistory } from "react-router-dom";
 import { useGetDeviceList } from "src/api/device";
 import { useGetDeviceMonitoring } from "src/api/dashboard";
 import { TimeConfigProviderContext } from "../../dashboard/_provider/TimeConfigProvider";
+import { DeviceSummaryContext } from "../_provider/DeviceSummaryProvider";
+import BigSpinner from "src/components/ui/big-spinner/BigSpinner";
 
 const SelectionColumnSLot = (props) => {
   const { onSelected } = props;
@@ -64,55 +66,92 @@ const ActionButtonSlot = (props) => {
   );
 };
 
-const DeviceSummaryDataTable = () => {
+const DeviceSummaryDataTable = ({ id_device }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { deviceMonitorTime } = useContext(TimeConfigProviderContext);
-
+  const { isNeedToLoading } = useContext(DeviceSummaryContext);
   const [deviceData, setDeviceData] = useState([]);
-  const [listID, setlistID] = useState([]);
+  const [deviceSummaryResult, setDeviceSummaryResult] = useState([]);
   const [isSelectAllSelected, setSelectAllSelected] = useState(false);
-
   const { data: listData, status: listStatus } = useGetDeviceList();
-  console.log("🚀 ~ DeviceSummaryDataTable ~ listData:", listData);
+  // console.log("🚀 ~ DeviceSummaryDataTable ~ listData:", listData);
   const { data: monitorData, status: monitorStatus } = useGetDeviceMonitoring(
-    listID[0],
+    id_device, // Id perangkat, bisa diabaikan karena ingin menampilkan semua perangkat
     null,
-    deviceMonitorTime && deviceMonitorTime.start,
-    deviceMonitorTime && deviceMonitorTime.end
+    deviceMonitorTime.start,
+    deviceMonitorTime.end
   );
+
+  // const [listID, setlistID] = useState([]);
   /*
-  1. dari listData didapat listID, (DONE)
-  2. lalu listID dijadikan sebagai parameter ke useGetDeviceMonitoring dan menghasilkan monitorData, (Baru get 1 ID, how to get the enitre data from monitoring for each id in the listID?? aku sudah coba...dan stuck)
-  3. lalu dari monitorData didapatkan field2 yg dibutuhkan,
-  4. lalu field2 tersebut dimasukan ke setDeviceData
-  5. dan deviceData akan dishow ke table
-  */
-  useEffect(() => {
-    if (listStatus === "success") {
-      if (!listData) return;
-      if (!listData.result) return;
-      const ids = listData.result.map((item) => item.id); // ambil hanya id dari listData
-      setlistID(ids); // masukan id2 tadi ke listID
-    }
-  }, [listData, listStatus]);
-  console.log("🚀 ~ DeviceSummaryDataTable ~ listID:", listID);
+    1. dari listData didapat listID, (DONE)
+    2. lalu listID dijadikan sebagai parameter ke useGetDeviceMonitoring dan menghasilkan monitorData, (Baru get 1 ID, how to get the enitre data from monitoring for each id in the listID?? aku sudah coba...dan stuck)
+    3. lalu dari monitorData didapatkan field2 yg dibutuhkan,
+    4. lalu field2 tersebut dimasukan ke setDeviceData
+    5. dan deviceData akan dishow ke table
+    */
+
+  // useEffect(() => {
+  //   if (listStatus === "success") {
+  //     if (!listData) return;
+  //     if (!listData.result) return;
+  //     const ids = listData.result.map((item) => item.id); // ambil hanya id dari listData
+  //     setlistID(ids); // masukan id2 tadi ke listID
+  //   }
+  // }, [listData, listStatus]);
+  // console.log("🚀 ~ DeviceSummaryDataTable ~ listID:", listID);
+
+  /*
+  KOMENTAR MICHELLE
+  - Di sini, kita mengambil data monitoring tanpa menggunakan id_device karena kita ingin menampilkan semua perangkat.
+  - id_device diambil saat membuat variabel deviceSummaryResult, di mana kita memanggil data monitor dan menyimpan id-nya di variabel id_device.
+  - Kemudian, deviceSummaryResult akan digunakan sebagai item di CTable.
+  - Item tersebut digunakan di scopedSlots. Jika dilihat, scopedSlots memanggil ActionButtonSlot.
+  - ActionButtonSlot menerima prop berupa data: item dan toggleDeviceSummaryDetail: handleDeviceSummaryTable.
+  - Nah, handleDeviceSummaryTable adalah fungsi yang memanggil tombol detail, di mana kita memanggil device_id: data.id_device (ingat: data => item => deviceSummaryResult).
+*/
 
   useEffect(() => {
-    dispatch({
-      type: "exportFromCoreUIDataTable",
-      fields: [
-        { key: "id_main_customer", label: "Customer ID" },
-        { key: "device_desc", label: "Device Name" },
-        { key: "device_name", label: "Device Code" },
-        { key: "status", label: "Status" },
-        { key: "cycle", label: "Cycle" },
-        { key: "billing", label: "Billing" },
-      ],
-      data: deviceData,
-      fileName: "Device List",
-    });
-  }, [deviceData, dispatch]);
+    // Jika pengambilan data pemantauan berhasil dan data tersedia
+    if (monitorStatus === "success" && monitorData && monitorData.result) {
+      const deviceSummaryData = monitorData.result.map((item) => ({
+        // Mengolah data pemantauan menjadi format yang sesuai untuk ditampilkan
+        id_device: item.id,
+        id_main_customer: item.id_main_customer,
+        device_desc: item.device_desc,
+        device_name: item.device_name,
+        status: item.status,
+        cycle: item.cycle_count_summarys[0]?.cycle || 0,
+        billing: item.billing,
+      }));
+      // Dispatch aksi untuk mengekspor data ke dalam format CSV
+      dispatch({
+        type: "exportFromCoreUIDataTable",
+        fields: [
+          { key: "id_main_customer", label: "Customer ID" },
+          { key: "device_desc", label: "Device Name" },
+          { key: "device_name", label: "Device Code" },
+          { key: "status", label: "Status" },
+          { key: "cycle", label: "Cycle" },
+          { key: "billing", label: "Billing" },
+        ],
+        data: deviceSummaryData,
+        fileName: "Device List",
+      });
+      setDeviceSummaryResult(deviceSummaryData);
+    }
+  }, [monitorData, monitorStatus, dispatch]);
+
+  console.log(
+    "🚀 ~ DeviceSummaryDataTable ~ deviceSummaryResult:",
+    deviceSummaryResult
+  );
+
+  // Menampilkan spinner jika data masih dalam proses pengambilan atau jika data pemantauan belum tersedia
+  if (monitorStatus !== "success" || !deviceSummaryResult || isNeedToLoading) {
+    return <BigSpinner text={"Loading data, can took a while..."} />;
+  }
 
   const fields = [
     { key: "selection", label: "", filter: false, _style: { width: "2%" } },
@@ -143,9 +182,13 @@ const DeviceSummaryDataTable = () => {
 
   const handleDeviceSummaryTable = (data) => {
     history.push({
-      pathname: "/dashboard",
+      pathname: "/device/realtime/summary/chart",
+      // pathname: "/dashboard",
       state: {
-        device_id: data.id,
+        // hasil parsingan id_device dari deviceSummaryResult
+        // data disini itu dari item di scopeslot
+        // itemnya ngambil dari deviceSummaryResult
+        device_id: data.id_device,
         device: data,
         device_name: data.device_desc,
       },
@@ -159,9 +202,9 @@ const DeviceSummaryDataTable = () => {
     });
   };
 
-  const handleSelect = (isSelected, listID) => {
+  const handleSelect = (isSelected, selectedId) => {
     setDeviceData((currentData) => {
-      const findIndex = currentData.findIndex((d) => d.id === listID);
+      const findIndex = currentData.findIndex((d) => d.id === selectedId);
       currentData[findIndex]._checked = isSelected;
       return [...currentData];
     });
@@ -200,7 +243,7 @@ const DeviceSummaryDataTable = () => {
   return (
     <Fragment>
       <CDataTable
-        items={deviceData}
+        items={deviceSummaryResult}
         responsive
         fields={fields}
         columnFilterSlot={columnFilterSlot}

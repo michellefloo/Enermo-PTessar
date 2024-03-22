@@ -14,12 +14,12 @@ import {
   EXCLUDED_CHART_PARAM,
 } from "../../../utils/constant";
 import { getSensorInChartNaming } from "../../../utils/helpers";
-import { DeviceHistoryContext } from "../_provider/DeviceSummaryChartProvider";
+import { DeviceSummaryChartContext } from "../_provider/DeviceSummaryChartProvider";
 import { TimeConfigProviderContext } from "src/views/dashboard/_provider/TimeConfigProvider";
 
 const LiveSensorChart = () => {
   const { deviceMonitorTime } = useContext(TimeConfigProviderContext);
-  const { selectedDevice } = useContext(DeviceHistoryContext);
+  const { selectedDevice } = useContext(DeviceSummaryChartContext);
   const id_device = selectedDevice.id;
   const { data: sensorData, status: sensorStatus } =
     useGetSensorByIddDeviceList(id_device);

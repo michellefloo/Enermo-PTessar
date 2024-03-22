@@ -1,10 +1,10 @@
 import { useEffect, useContext } from "react";
 import { useDispatch } from "react-redux";
-import { DeviceHistoryContext } from "../_provider/DeviceSummaryChartProvider";
+import { DeviceSummaryChartContext } from "../_provider/DeviceSummaryChartProvider";
 
 const HistoryDeviceErrorHandler = () => {
   const dispatch = useDispatch();
-  const { selectedDevice } = useContext(DeviceHistoryContext);
+  const { selectedDevice } = useContext(DeviceSummaryChartContext);
   useEffect(() => {
     if (selectedDevice.id === -1) {
       dispatch({

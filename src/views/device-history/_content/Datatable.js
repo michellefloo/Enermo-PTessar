@@ -28,8 +28,8 @@
 // const SelectionColumnSLot = (props) => {
 //     const {onSelected} = props
 //     return(
-//         <CInput 
-//             type="checkbox" 
+//         <CInput
+//             type="checkbox"
 //             size="sm"
 //             onChange={e => {
 //                 onSelected(e.target.checked)
@@ -42,7 +42,7 @@
 //     const {data, onSelected} = props
 //     return(
 //         <td >
-//             <CInputCheckbox  
+//             <CInputCheckbox
 //                 className="mx-auto"
 //                 checked={data._checked || false}
 //                 onChange={e => {
@@ -58,7 +58,7 @@
 //     return null
 //     return(
 //         <CCollapse show={true}>
-//                 <CycleDatatable 
+//                 <CycleDatatable
 //                     rowData={data}
 //                     allData={historyResult.cycleDetailEachDay}
 //                 />
@@ -94,7 +94,7 @@
 //     const [detailType, setDetailType] = useState('cycle')
 //     const [utilityData, setUtilityData] = useState([])
 //     const [isSelecAllSelected, setSelecAllSelected] = useState(false)
-//     const {selectedStartDate, selectedEndDate, selectedDevice, isNeedToLoading, setIsNeedToLoading} = useContext(DeviceHistoryContext) 
+//     const {selectedStartDate, selectedEndDate, selectedDevice, isNeedToLoading, setIsNeedToLoading} = useContext(DeviceHistoryContext)
 //     const [historyResult, setHistoryResult] = useState(null)
 //     const {data: rqDataMonitoring, status: rqStatusMonitoring} = useGetDeviceMonitoringByDate(
 //                 selectedDevice.id, moment(selectedStartDate).unix(), moment(selectedEndDate).unix(),
@@ -115,7 +115,7 @@
 //         if(!historyResult) return
 //         if(!historyResult.summaryEachDay) return
 //         if(!historyResult.cycleDetailEachDay) return
-//         // dispatch({type: 'exportFromCoreUIDataTable', 
+//         // dispatch({type: 'exportFromCoreUIDataTable',
 //         //         fields: [
 //         //             { key: 'customer', label: 'Customer'},
 //         //             { key: 'location', label: "Location"},
@@ -124,7 +124,7 @@
 
 //         //         ],
 //         //         data: historyResult.summaryEachDay,
-//         //         fileName: `Summary of ${selectedDevice.name} 
+//         //         fileName: `Summary of ${selectedDevice.name}
 //         //                     from ${moment(selectedStartDate).format(DATE_ISO8601_NO_TIME)} -
 //         //                         ${moment(selectedEndDate).format(DATE_ISO8601_NO_TIME)}`
 //         // })
@@ -161,7 +161,7 @@
 //                 })
 //             }
 //         })
-//         dispatch({type: 'exportFromCoreUIDataTable', 
+//         dispatch({type: 'exportFromCoreUIDataTable',
 //         fields: [
 //             { key: 'id', label: "Group ID"},
 //             { key: 'date', label: "Date"},
@@ -218,12 +218,12 @@
 //         { key: 'date', label: "Date", _style: { width: '15%'}},
 //         { key: 'cycle', label: "Total Cycle", _style: { width: '15%'}},
 //         { key: 'action', label:"Action", filter:false , _style: { width: '10%'}},
-//     ]   
+//     ]
 //     const scopedSlots = {
 //         // 'selection': (item) => <SelectionSlot data={item} onSelected={handleSelect} />,
 //         // 'utility_wattage': (item) => <WattageSlot data={item} />,
 //         'details': (item) => getDetailsSlot(item),
-//         'action': (item) => <ActionButtonSlot 
+//         'action': (item) => <ActionButtonSlot
 //                                 data={item}
 //                                 details={details}
 //                                 toggleCycleDetail={handleCycleDetailToggle}
@@ -263,10 +263,9 @@
 //         setUtilityData(items)
 //     }
 
-
 //     return (
 //         <CRow>
-//             {/* <CDataTable 
+//             {/* <CDataTable
 //                 items={historyResult.summaryEachDay}
 //                 responsive
 //                 fields={fields}

@@ -1,9 +1,9 @@
 import React, { createContext, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-export const DeviceSummaryChartContext = createContext();
+export const DeviceSummaryContext = createContext();
 
-const DeviceSummaryChartProvider = ({ children }) => {
+const DeviceSummaryProvider = ({ children }) => {
   const location = useLocation();
   const [selectedDevice] = useState({
     id: location.state ? location.state.device_id : -1,
@@ -14,7 +14,7 @@ const DeviceSummaryChartProvider = ({ children }) => {
   const [selectedStartDate, setSelectedStartDate] = useState(null);
   const [selectedEndDate, setSelectedEndDate] = useState(null);
   return (
-    <DeviceSummaryChartContext.Provider
+    <DeviceSummaryContext.Provider
       value={{
         selectedDevice,
         isNeedToLoading,
@@ -26,7 +26,7 @@ const DeviceSummaryChartProvider = ({ children }) => {
       }}
     >
       {children}
-    </DeviceSummaryChartContext.Provider>
+    </DeviceSummaryContext.Provider>
   );
 };
-export default DeviceSummaryChartProvider;
+export default DeviceSummaryProvider;
