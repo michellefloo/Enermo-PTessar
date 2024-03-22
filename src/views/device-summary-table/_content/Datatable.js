@@ -275,6 +275,7 @@ const DeviceSummaryDataTable = ({ id_device }) => {
       <CDataTable
         items={deviceSummaryResult}
         responsive
+        striped
         fields={fields}
         columnFilterSlot={columnFilterSlot}
         scopedSlots={scopedSlots}
