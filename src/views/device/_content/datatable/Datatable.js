@@ -363,7 +363,6 @@ const DeviceDatatable = () => {
       <CDataTable
         items={deviceData}
         responsive
-        striped
         fields={fields}
         columnFilterSlot={columnFilterSlot}
         scopedSlots={scopedSlots}
