@@ -50,7 +50,6 @@ export const useRqMutation = (url, updater, config) => {
   const queryClient = useQueryClient();
   // const queryCache = queryClient.getQueryCache();
   // const queryKeys = queryCache.getAll().map((cache) => cache.queryKey);
-  // console.log(queryKeys);
   return useMutation({
     mutationFn: (data) => (config.onlyToCache ? null : axios.post(url, data)),
     onMutate: async (newData) => {

@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect, useContext } from "react";
+import React, { Fragment, useContext } from "react";
 // import { useGetGroupInstallByIddGroupList } from '../../../api/device-installation'
 import { CCol, CRow, CWidgetIcon, CSpinner } from "@coreui/react";
 import CIcon from "@coreui/icons-react";

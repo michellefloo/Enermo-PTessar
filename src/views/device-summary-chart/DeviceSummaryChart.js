@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { Fragment } from "react";
 import { CRow, CCol, CCard, CCardHeader, CCardBody } from "@coreui/react";
 import DeviceHeaderWidget from "./_content/HeaderWidget";
 import ErrorHandler from "./_content/ErrorHandler";

@@ -13,9 +13,6 @@ const Kwh = ({ id_device, id_sensor }) => {
   const [numbersKwh, setNumberKwh] = useState(0);
 
   useEffect(() => {
-    // console.log("Data:", data);
-    // console.log("Status:", status);
-
     if (status === "success") {
       // Check apakah data.result ada atau tidak
       if (data && data.result) {
@@ -28,17 +25,14 @@ const Kwh = ({ id_device, id_sensor }) => {
         // Menggunakan toFixed(2) untuk mengambil 2 angka desimal
         setNumberKwh(totalKwhAvg.toFixed(2));
       } else {
-        // console.log("Data result is empty.");
         setNumberKwh(0);
       }
     } else {
-      // console.log("Data fetching failed.");
       setNumberKwh(0);
     }
   }, [data, status]);
 
   if (status !== "success") {
-    // console.log("Waiting for data...");
     return "...";
   }
 

@@ -27,9 +27,6 @@ const CycleActivePower = ({ device, param }) => {
       const cycleCountData = data.result[0].cycle_count;
       const cycleCountSummaryData = data.result[0].cycle_count_summarys;
 
-      // console.log("Cycle Count Data", cycleCountData);
-      // console.log("Cycle Count Summary Data", cycleCountSummaryData);
-
       // Hitung jumlah total siklus dari semua objek dalam array cycleCountData dan menyimpannya dalam variabel totalCycle.
       // Menggunakan metode reduce() untuk menjumlahkan nilai dari properti cycle dari setiap objek dalam array cycle_countData
       // const totalCycle = cycleCountData.reduce(
