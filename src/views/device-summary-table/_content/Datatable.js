@@ -8,6 +8,7 @@ import {
   CInput,
   CButton,
   CContainer,
+  CBadge,
 } from "@coreui/react";
 
 import { useHistory } from "react-router-dom";
@@ -60,6 +61,15 @@ const ActionButtonSlot = (props) => {
           </CButton>
         </div>
       </CContainer>
+    </td>
+  );
+};
+
+const DeviceDescSlot = ({ data }) => {
+  return (
+    <td>
+      {data.device_desc}&nbsp;
+      {data.is_main_panel ? <CBadge color="info">main</CBadge> : null}
     </td>
   );
 };
@@ -162,13 +172,42 @@ const DeviceSummaryDataTable = ({ id_device }) => {
 
   const fields = [
     { key: "selection", label: "", filter: false, _style: { width: "2%" } },
-    { key: "id_main_customer", label: "Customer ID", _style: { width: "15%" } },
-    { key: "device_desc", label: "Device Name", _style: { width: "15%" } },
-    { key: "device_name", label: "Device Code", _style: { width: "10%" } },
-    { key: "status", label: "Status", _style: { width: "10%" } },
-    { key: "cycle", label: "Cycle", _style: { width: "15%" } },
-    { key: "billing", label: "Billing", _style: { width: "15%" } },
-    { key: "action", label: "Action", filter: false, _style: { width: "10%" } },
+    {
+      key: "id_main_customer",
+      label: "Customer ID",
+      _style: { width: "15%", textAlign: "center" },
+    },
+    {
+      key: "device_desc",
+      label: "Device Name",
+      _style: { width: "15%", textAlign: "center" },
+    },
+    {
+      key: "device_name",
+      label: "Device Code",
+      _style: { width: "25%", textAlign: "center" },
+    },
+    {
+      key: "status",
+      label: "Status",
+      _style: { width: "10%", textAlign: "center" },
+    },
+    {
+      key: "cycle",
+      label: "Cycle",
+      _style: { width: "2%", textAlign: "center" },
+    },
+    {
+      key: "billing",
+      label: "Billing",
+      _style: { width: "15%", textAlign: "center" },
+    },
+    {
+      key: "action",
+      label: "Action",
+      filter: false,
+      _style: { width: "10%", textAlign: "center" },
+    },
   ];
 
   const columnFilterSlot = {
@@ -179,12 +218,14 @@ const DeviceSummaryDataTable = ({ id_device }) => {
     selection: (item) => (
       <SelectionSlot data={item} onSelected={handleSelect} />
     ),
+    device_desc: (item) => <DeviceDescSlot data={item} />,
     action: (item) => (
       <ActionButtonSlot
         data={item}
         toggleDeviceSummaryDetail={handleDeviceSummaryTable}
       />
     ),
+    _style: { textAlign: "center" },
   };
 
   useEffect(() => {
@@ -199,6 +240,7 @@ const DeviceSummaryDataTable = ({ id_device }) => {
         status: item.status,
         cycle: item.cycle_count_summarys[0]?.cycle || 0,
         billing: item.billing,
+        is_main_panel: item.is_main_panel,
       }));
       // Dispatch aksi untuk mengekspor data ke dalam format CSV
       dispatch({
