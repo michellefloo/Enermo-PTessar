@@ -17,8 +17,7 @@ import { TimeConfigProviderContext } from "../../dashboard/_provider/TimeConfigP
 import { DeviceSummaryContext } from "../_provider/DeviceSummaryProvider";
 import BigSpinner from "src/components/ui/big-spinner/BigSpinner";
 
-const SelectionColumnSLot = (props) => {
-  const { onSelected } = props;
+const SelectionColumnSlot = ({ onSelected }) => {
   return (
     <CInput
       type="checkbox"
@@ -30,15 +29,14 @@ const SelectionColumnSLot = (props) => {
   );
 };
 
-const SelectionSlot = (props) => {
-  const { data, onSelected } = props;
+const SelectionSlot = ({ data, onSelected }) => {
   return (
     <td>
       <CInputCheckbox
         className="mx-auto"
         checked={data._checked || false}
         onChange={(e) => {
-          onSelected(e.target.checked, data.id);
+          onSelected(e.target.checked, data.id_device);
         }}
       />
     </td>
@@ -71,7 +69,6 @@ const DeviceSummaryDataTable = ({ id_device }) => {
   const history = useHistory();
   const { deviceMonitorTime } = useContext(TimeConfigProviderContext);
   const { isNeedToLoading } = useContext(DeviceSummaryContext);
-  const [deviceData, setDeviceData] = useState([]);
   const [deviceSummaryResult, setDeviceSummaryResult] = useState([]);
   const [isSelectAllSelected, setSelectAllSelected] = useState(false);
   const { data: listData, status: listStatus } = useGetDeviceList();
@@ -91,6 +88,104 @@ const DeviceSummaryDataTable = ({ id_device }) => {
   - ActionButtonSlot menerima prop berupa data: item dan toggleDeviceSummaryDetail: handleDeviceSummaryTable.
   - Nah, handleDeviceSummaryTable adalah fungsi yang memanggil tombol detail, di mana kita memanggil device_id: data.id_device (ingat: data => item => deviceSummaryResult).
 */
+
+  const handleDeviceSummaryTable = (data) => {
+    history.push({
+      pathname: "/device/realtime/summary/chart",
+      state: {
+        // hasil parsingan id_device dari deviceSummaryResult
+        // data diambil dari items di ActionButtonSlot dari scopedSlots
+        // itemsnya diambil dari deviceSummaryResult
+        device_id: data.id_device,
+        device: data,
+        device_name: data.device_desc,
+      },
+    });
+  };
+
+  const handleSelectAll = (isSelected) => {
+    setSelectAllSelected(isSelected);
+    const updatedData = deviceSummaryResult.map((item) => ({
+      ...item,
+      _checked: isSelected,
+    }));
+    setDeviceSummaryResult(updatedData);
+  };
+
+  const handleSelect = (isSelected, selectedId) => {
+    setDeviceSummaryResult((currentData) => {
+      const findIndex = currentData.findIndex(
+        (d) => d.id_device === selectedId
+      );
+      if (findIndex !== -1) {
+        const updatedData = [...currentData];
+        updatedData[findIndex] = {
+          ...updatedData[findIndex],
+          _checked: isSelected,
+        };
+        return updatedData;
+      }
+      return currentData;
+    });
+  };
+
+  const handleColumnFilterChange = (e) => {
+    if (listStatus !== "success") {
+      return;
+    }
+    let isFilterEmpty = true;
+    const eKeys = Object.keys(e);
+    for (let i = 0; i < eKeys.length; i++) {
+      if (e[eKeys[i]].length > 0) {
+        isFilterEmpty = false;
+        break;
+      }
+    }
+    if (isFilterEmpty) {
+      setDeviceSummaryResult(listData.result);
+    }
+    if (isSelectAllSelected) {
+      handleSelectAll(true);
+    }
+  };
+
+  const handleOnFilteredItemsChange = (items) => {
+    if (listStatus !== "success") {
+      return;
+    }
+    if (items.length === 0) {
+      setDeviceSummaryResult(listData.result);
+      return;
+    }
+    setDeviceSummaryResult(items);
+  };
+
+  const fields = [
+    { key: "selection", label: "", filter: false, _style: { width: "2%" } },
+    { key: "id_main_customer", label: "Customer ID", _style: { width: "15%" } },
+    { key: "device_desc", label: "Device Name", _style: { width: "15%" } },
+    { key: "device_name", label: "Device Code", _style: { width: "10%" } },
+    { key: "status", label: "Status", _style: { width: "10%" } },
+    { key: "cycle", label: "Cycle", _style: { width: "15%" } },
+    { key: "billing", label: "Billing", _style: { width: "15%" } },
+    { key: "action", label: "Action", filter: false, _style: { width: "10%" } },
+  ];
+
+  const columnFilterSlot = {
+    selection: <SelectionColumnSlot onSelected={handleSelectAll} />,
+  };
+
+  const scopedSlots = {
+    selection: (item) => (
+      <SelectionSlot data={item} onSelected={handleSelect} />
+    ),
+    action: (item) => (
+      <ActionButtonSlot
+        data={item}
+        toggleDeviceSummaryDetail={handleDeviceSummaryTable}
+      />
+    ),
+  };
 
   useEffect(() => {
     // Jika pengambilan data pemantauan berhasil dan data tersedia
@@ -132,92 +227,6 @@ const DeviceSummaryDataTable = ({ id_device }) => {
   if (monitorStatus !== "success" || !deviceSummaryResult || isNeedToLoading) {
     return <BigSpinner text={"Loading data, can took a while..."} />;
   }
-
-  const fields = [
-    { key: "selection", label: "", filter: false, _style: { width: "2%" } },
-    { key: "id_main_customer", label: "Customer ID", _style: { width: "15%" } },
-    { key: "device_desc", label: "Device Name", _style: { width: "15%" } },
-    { key: "device_name", label: "Device Code", _style: { width: "10%" } },
-    { key: "status", label: "Status", _style: { width: "10%" } },
-    { key: "cycle", label: "Cycle", _style: { width: "15%" } },
-    { key: "billing", label: "Billing", _style: { width: "15%" } },
-    { key: "action", label: "Action", filter: false, _style: { width: "10%" } },
-  ];
-
-  const handleSelectAll = (isSelected) => {
-    setSelectAllSelected(isSelected);
-    setDeviceData((currentData) => {
-      return currentData.map((d) => ({ ...d, _checked: isSelected }));
-    });
-  };
-
-  const columnFilterSlot = {
-    selection: <SelectionColumnSLot onSelected={handleSelectAll} />,
-  };
-
-  const scopedSlots = {
-    selection: (item) => (
-      <SelectionSlot data={item} onSelected={handleSelect} />
-    ),
-    action: (item) => (
-      <ActionButtonSlot
-        data={item}
-        toggleDeviceSummaryDetail={handleDeviceSummaryTable}
-      />
-    ),
-  };
-
-  const handleDeviceSummaryTable = (data) => {
-    history.push({
-      pathname: "/device/realtime/summary/chart",
-      state: {
-        // hasil parsingan id_device dari deviceSummaryResult
-        // data diambil dari items di ActionButtonSlot dari scopedSlots
-        // itemsnya diambil dari deviceSummaryResult
-        device_id: data.id_device,
-        device: data,
-        device_name: data.device_desc,
-      },
-    });
-  };
-
-  const handleSelect = (isSelected, selectedId) => {
-    setDeviceData((currentData) => {
-      const findIndex = currentData.findIndex((d) => d.id === selectedId);
-      currentData[findIndex]._checked = isSelected;
-      return [...currentData];
-    });
-  };
-  const handleColumnFilterChange = (e) => {
-    if (listStatus !== "success") {
-      return;
-    }
-    let isFilterEmpty = true;
-    const eKeys = Object.keys(e);
-    for (let i = 0; i < eKeys.length; i++) {
-      if (e[eKeys[i]].length > 0) {
-        isFilterEmpty = false;
-        break;
-      }
-    }
-    if (isFilterEmpty) {
-      setDeviceData(listData.result);
-    }
-    if (isSelectAllSelected) {
-      handleSelectAll(true);
-    }
-  };
-
-  const handleOnFilteredItemsChange = (items) => {
-    if (listStatus !== "success") {
-      return;
-    }
-    if (items.length === 0) {
-      setDeviceData(listData.result);
-      return;
-    }
-    setDeviceData(items);
-  };
 
   return (
     <Fragment>
