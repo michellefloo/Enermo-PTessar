@@ -106,7 +106,7 @@ const DeviceSummaryDataTable = ({ id_device }) => {
   KOMENTAR MICHELLE
   - Di sini, kita mengambil data monitoring tanpa menggunakan id_device karena kita ingin menampilkan semua perangkat.
   - id_device diambil saat membuat variabel deviceSummaryResult, di mana kita memanggil data monitor dan menyimpan id-nya di variabel id_device.
-  - Kemudian, deviceSummaryResult akan digunakan sebagai item di CTable.
+  - Kemudian, deviceSummaryResult akan digunakan sebagai item di CDataTable.
   - Item tersebut digunakan di scopedSlots. Jika dilihat, scopedSlots memanggil ActionButtonSlot.
   - ActionButtonSlot menerima prop berupa data: item dan toggleDeviceSummaryDetail: handleDeviceSummaryTable.
   - Nah, handleDeviceSummaryTable adalah fungsi yang memanggil tombol detail, di mana kita memanggil device_id: data.id_device (ingat: data => item => deviceSummaryResult).
@@ -186,8 +186,8 @@ const DeviceSummaryDataTable = ({ id_device }) => {
       // pathname: "/dashboard",
       state: {
         // hasil parsingan id_device dari deviceSummaryResult
-        // data disini itu dari item di scopeslot
-        // itemnya ngambil dari deviceSummaryResult
+        // data diambil dari items di ActionButtonSlot dari scopedSlots
+        // itemsnya diambil dari deviceSummaryResult
         device_id: data.id_device,
         device: data,
         device_name: data.device_desc,
