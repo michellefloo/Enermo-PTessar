@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import { useGetSensorByIddDeviceList } from "../../../../api/sensor";
 import { useGetLastDeviceInstallByIddDeviceList } from "../../../../api/device-installation";
 import { DEVICE_PARAMS_CONST } from "../../../../utils/constant";

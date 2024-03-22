@@ -84,15 +84,8 @@ const DeviceGroupAddModal = () => {
         }
       },
     });
-    const {
-      values,
-      errors,
-      touched,
-      setFieldValue,
-      handleBlur,
-      handleChange,
-      isSubmitting,
-    } = formik;
+    const { values, errors, touched, handleBlur, handleChange, isSubmitting } =
+      formik;
     useImperativeHandle(ref, () => ({
       ...formik,
     }));

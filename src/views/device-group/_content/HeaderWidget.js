@@ -1,6 +1,6 @@
 import React, { Fragment, useContext } from "react";
 // import { useGetGroupInstallByIddGroupList } from '../../../api/device-installation'
-import { CCol, CRow, CWidgetIcon, CSpinner } from "@coreui/react";
+import { CCol, CRow, CWidgetIcon } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import { cilObjectGroup } from "@coreui/icons";
 import { GroupSelectContext } from "../_provider/GroupSelectProvider";

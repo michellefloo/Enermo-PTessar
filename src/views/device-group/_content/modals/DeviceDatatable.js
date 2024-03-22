@@ -11,8 +11,8 @@ import {
   CCollapse,
   CBadge,
 } from "@coreui/react";
-import CIcon from "@coreui/icons-react";
-import { cilAudio } from "@coreui/icons";
+// import CIcon from "@coreui/icons-react";
+// import { cilAudio } from "@coreui/icons";
 // import SensorDatatableDetail from './SensorDatatableDetail'
 // import InstallationDatatableDetail from './InstallationDatatableDetail'
 import { useHistory } from "react-router-dom";

@@ -144,6 +144,13 @@ const DeviceSummaryDataTable = ({ id_device }) => {
     { key: "action", label: "Action", filter: false, _style: { width: "10%" } },
   ];
 
+  const handleSelectAll = (isSelected) => {
+    setSelectAllSelected(isSelected);
+    setDeviceData((currentData) => {
+      return currentData.map((d) => ({ ...d, _checked: isSelected }));
+    });
+  };
+
   const columnFilterSlot = {
     selection: <SelectionColumnSLot onSelected={handleSelectAll} />,
   };
@@ -171,13 +178,6 @@ const DeviceSummaryDataTable = ({ id_device }) => {
         device: data,
         device_name: data.device_desc,
       },
-    });
-  };
-
-  const handleSelectAll = (isSelected) => {
-    setSelectAllSelected(isSelected);
-    setDeviceData((currentData) => {
-      return currentData.map((d) => ({ ...d, _checked: isSelected }));
     });
   };
 

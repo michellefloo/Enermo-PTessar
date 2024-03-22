@@ -1,9 +1,5 @@
 import apiRoutes from "./routes";
 import { useFecth } from "../utils/react-query";
-import axios from "src/utils/axios";
-import axiosNew from "axios";
-import moment from "moment";
-import { DATE_ISO8601 } from "src/utils/constant";
 import { useGetSensorByIddDeviceList } from "../api/sensor";
 
 export const useGetKwhAvg = (id_device, id_sensor, startUnix, endUnix) => {
@@ -11,7 +7,7 @@ export const useGetKwhAvg = (id_device, id_sensor, startUnix, endUnix) => {
 
   const sensorId = sensorData?.result[0]?.id; // Mengambil id_sensor dari hasil panggilan useGetSensorByIddDeviceList
 
-  const { data: data, status } = useFecth(
+  const { data, status } = useFecth(
     apiRoutes.getKwhAvgNew,
     {
       id_device: String(id_device),
