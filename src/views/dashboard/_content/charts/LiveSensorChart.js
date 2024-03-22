@@ -42,10 +42,10 @@ const LiveSensorChart = ({ id_device }) => {
     // },
     legend: {
       display: true,
-      position: "top", // Menentukan posisi legenda
+      position: "right", // Menentukan posisi legenda
       labels: {
         fontColor: "#555", // Warna label legenda
-        fontSize: 12,
+        fontSize: 10,
       },
     },
   };
@@ -103,7 +103,7 @@ const LiveSensorChart = ({ id_device }) => {
           y: log.value,
         });
         if (String(log.type) === String(filteredLogs[0].type)) {
-          labels.push(moment(log.created_on).format("HH:mm:ss"));
+          labels.push(moment(log.created_on).format("HH:mm"));
         }
       });
       chartData.forEach((log) => {
@@ -137,4 +137,3 @@ const LiveSensorChart = ({ id_device }) => {
 };
 
 export default LiveSensorChart;
-

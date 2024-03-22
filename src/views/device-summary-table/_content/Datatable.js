@@ -75,32 +75,12 @@ const DeviceSummaryDataTable = ({ id_device }) => {
   const [deviceSummaryResult, setDeviceSummaryResult] = useState([]);
   const [isSelectAllSelected, setSelectAllSelected] = useState(false);
   const { data: listData, status: listStatus } = useGetDeviceList();
-  // console.log("🚀 ~ DeviceSummaryDataTable ~ listData:", listData);
   const { data: monitorData, status: monitorStatus } = useGetDeviceMonitoring(
     id_device, // Id perangkat, bisa diabaikan karena ingin menampilkan semua perangkat
     null,
     deviceMonitorTime.start,
     deviceMonitorTime.end
   );
-
-  // const [listID, setlistID] = useState([]);
-  /*
-    1. dari listData didapat listID, (DONE)
-    2. lalu listID dijadikan sebagai parameter ke useGetDeviceMonitoring dan menghasilkan monitorData, (Baru get 1 ID, how to get the enitre data from monitoring for each id in the listID?? aku sudah coba...dan stuck)
-    3. lalu dari monitorData didapatkan field2 yg dibutuhkan,
-    4. lalu field2 tersebut dimasukan ke setDeviceData
-    5. dan deviceData akan dishow ke table
-    */
-
-  // useEffect(() => {
-  //   if (listStatus === "success") {
-  //     if (!listData) return;
-  //     if (!listData.result) return;
-  //     const ids = listData.result.map((item) => item.id); // ambil hanya id dari listData
-  //     setlistID(ids); // masukan id2 tadi ke listID
-  //   }
-  // }, [listData, listStatus]);
-  // console.log("🚀 ~ DeviceSummaryDataTable ~ listID:", listID);
 
   /*
   KOMENTAR MICHELLE
@@ -183,7 +163,6 @@ const DeviceSummaryDataTable = ({ id_device }) => {
   const handleDeviceSummaryTable = (data) => {
     history.push({
       pathname: "/device/realtime/summary/chart",
-      // pathname: "/dashboard",
       state: {
         // hasil parsingan id_device dari deviceSummaryResult
         // data diambil dari items di ActionButtonSlot dari scopedSlots
