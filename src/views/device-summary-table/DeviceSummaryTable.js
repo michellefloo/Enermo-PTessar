@@ -4,7 +4,6 @@ import HeaderWidget from "./_content/HeaderWidget";
 import Datatable from "./_content/Datatable";
 import DeviceErrorHandler from "./_content/ErrorHandler";
 import TimeConfigProvider from "../dashboard/_provider/TimeConfigProvider";
-
 const DeviceSummaryTable = () => {
   return (
     <TimeConfigProvider>

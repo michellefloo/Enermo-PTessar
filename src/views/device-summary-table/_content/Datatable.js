@@ -1,6 +1,5 @@
 import React, { Fragment, useState, useEffect, useContext } from "react";
 import { useDispatch } from "react-redux";
-import { useGetDeviceList } from "../../../api/device";
 import CIcon from "@coreui/icons-react";
 import { cilChart } from "@coreui/icons";
 import {
@@ -12,6 +11,7 @@ import {
 } from "@coreui/react";
 
 import { useHistory } from "react-router-dom";
+import { useGetDeviceList } from "src/api/device";
 import { useGetDeviceMonitoring } from "src/api/dashboard";
 import { TimeConfigProviderContext } from "../../dashboard/_provider/TimeConfigProvider";
 
@@ -67,48 +67,52 @@ const ActionButtonSlot = (props) => {
 const DeviceSummaryDataTable = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-
-  const { data: rqData, status: rqStatus } = useGetDeviceList();
-  console.log("🚀 ~ DeviceSummaryDataTable ~ rqData:", rqData);
-  const [deviceData, setDeviceData] = useState([]);
-  const [selectedId, setSelectedId] = useState(null);
   const { deviceMonitorTime } = useContext(TimeConfigProviderContext);
-  console.log("🚀 ~ DeviceSummaryDataTable ~ selectedId:", selectedId); // 126
+
+  const [deviceData, setDeviceData] = useState([]);
+  const [listID, setlistID] = useState([]);
   const [isSelectAllSelected, setSelectAllSelected] = useState(false);
 
-  const { data, status } = useGetDeviceMonitoring(
-    selectedId,
+  const { data: listData, status: listStatus } = useGetDeviceList();
+  console.log("🚀 ~ DeviceSummaryDataTable ~ listData:", listData);
+  const { data: monitorData, status: monitorStatus } = useGetDeviceMonitoring(
+    listID[0],
     null,
     deviceMonitorTime && deviceMonitorTime.start,
     deviceMonitorTime && deviceMonitorTime.end
   );
+  /*
+  1. dari listData didapat listID, (DONE)
+  2. lalu listID dijadikan sebagai parameter ke useGetDeviceMonitoring dan menghasilkan monitorData, (Baru get 1 ID, how to get the enitre data from monitoring for each id in the listID?? aku sudah coba...dan stuck)
+  3. lalu dari monitorData didapatkan field2 yg dibutuhkan,
+  4. lalu field2 tersebut dimasukan ke setDeviceData
+  5. dan deviceData akan dishow ke table
+  */
+  useEffect(() => {
+    if (listStatus === "success") {
+      if (!listData) return;
+      if (!listData.result) return;
+      const ids = listData.result.map((item) => item.id); // ambil hanya id dari listData
+      setlistID(ids); // masukan id2 tadi ke listID
+    }
+  }, [listData, listStatus]);
+  console.log("🚀 ~ DeviceSummaryDataTable ~ listID:", listID);
 
-  const handleDeviceSummaryTable = (data) => {
-    history.push({
-      // pathname: "/dashboard",
-      pathname: "/device/realtime/summary/chart",
-      state: {
-        device_id: data.id,
-        device: data,
-        device_name: data.device_desc,
-      },
+  useEffect(() => {
+    dispatch({
+      type: "exportFromCoreUIDataTable",
+      fields: [
+        { key: "id_main_customer", label: "Customer ID" },
+        { key: "device_desc", label: "Device Name" },
+        { key: "device_name", label: "Device Code" },
+        { key: "status", label: "Status" },
+        { key: "cycle", label: "Cycle" },
+        { key: "billing", label: "Billing" },
+      ],
+      data: deviceData,
+      fileName: "Device List",
     });
-  };
-
-  const handleSelectAll = (isSelected) => {
-    setSelectAllSelected(isSelected);
-    setDeviceData((currentData) => {
-      return currentData.map((d) => ({ ...d, _checked: isSelected }));
-    });
-  };
-
-  const handleSelect = (isSelected, selectedId) => {
-    setDeviceData((currentData) => {
-      const findIndex = currentData.findIndex((d) => d.id === selectedId);
-      currentData[findIndex]._checked = isSelected;
-      return [...currentData];
-    });
-  };
+  }, [deviceData, dispatch]);
 
   const fields = [
     { key: "selection", label: "", filter: false, _style: { width: "2%" } },
@@ -137,33 +141,33 @@ const DeviceSummaryDataTable = () => {
     ),
   };
 
-  useEffect(() => {
-    if (rqStatus === "success") {
-      if (!rqData) return;
-      if (!rqData.result) return;
-      setSelectedId(rqData.result[0].id);
-    }
-    // console.log("🚀 ~ useEffect ~ rqData.result.id:", rqData?.result?.id); // undefined
-  }, [rqData, rqStatus]);
-
-  useEffect(() => {
-    dispatch({
-      type: "exportFromCoreUIDataTable",
-      fields: [
-        { key: "id_main_customer", label: "Customer ID" },
-        { key: "device_desc", label: "Device Name" },
-        { key: "device_name", label: "Device Code" },
-        { key: "status", label: "Status" },
-        { key: "cycle", label: "Cycle" },
-        { key: "billing", label: "Billing" },
-      ],
-      data: deviceData,
-      fileName: "Device List",
+  const handleDeviceSummaryTable = (data) => {
+    history.push({
+      pathname: "/dashboard",
+      state: {
+        device_id: data.id,
+        device: data,
+        device_name: data.device_desc,
+      },
     });
-  }, [deviceData, dispatch]);
+  };
 
+  const handleSelectAll = (isSelected) => {
+    setSelectAllSelected(isSelected);
+    setDeviceData((currentData) => {
+      return currentData.map((d) => ({ ...d, _checked: isSelected }));
+    });
+  };
+
+  const handleSelect = (isSelected, listID) => {
+    setDeviceData((currentData) => {
+      const findIndex = currentData.findIndex((d) => d.id === listID);
+      currentData[findIndex]._checked = isSelected;
+      return [...currentData];
+    });
+  };
   const handleColumnFilterChange = (e) => {
-    if (rqStatus !== "success") {
+    if (listStatus !== "success") {
       return;
     }
     let isFilterEmpty = true;
@@ -175,7 +179,7 @@ const DeviceSummaryDataTable = () => {
       }
     }
     if (isFilterEmpty) {
-      setDeviceData(rqData.result);
+      setDeviceData(listData.result);
     }
     if (isSelectAllSelected) {
       handleSelectAll(true);
@@ -183,11 +187,11 @@ const DeviceSummaryDataTable = () => {
   };
 
   const handleOnFilteredItemsChange = (items) => {
-    if (rqStatus !== "success") {
+    if (listStatus !== "success") {
       return;
     }
     if (items.length === 0) {
-      setDeviceData(rqData.result);
+      setDeviceData(listData.result);
       return;
     }
     setDeviceData(items);
@@ -203,7 +207,7 @@ const DeviceSummaryDataTable = () => {
         scopedSlots={scopedSlots}
         columnFilter
         itemsPerPage={15}
-        loading={rqStatus === "loading"}
+        loading={listStatus === "loading"}
         onColumnFilterChange={(e) => handleColumnFilterChange(e)}
         onFilteredItemsChange={(i) => handleOnFilteredItemsChange(i)}
         hover

@@ -4,7 +4,6 @@ import DeviceHeaderWidget from "./_content/HeaderWidget";
 import ErrorHandler from "./_content/ErrorHandler";
 import Chart from "./_content/Chart";
 import TimeConfigProvider from "../dashboard/_provider/TimeConfigProvider";
-
 const DeviceSummaryChart = () => {
   return (
     <TimeConfigProvider>
@@ -23,7 +22,8 @@ const DeviceSummaryChart = () => {
           <CCardHeader>
             <strong>Device Summary Chart</strong>
           </CCardHeader>
-          <CCardBody>
+          <CCardBody className="text-center d-blok">
+            <i>Klik legenda untuk menampilkan filter</i>
             <Chart />
           </CCardBody>
         </CCard>
