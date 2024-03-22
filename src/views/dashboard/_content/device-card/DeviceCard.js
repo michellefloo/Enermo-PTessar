@@ -30,9 +30,6 @@ const DeviceCard = ({ devices }) => {
 
   return (
     <CRow>
-      {/* <CCol xs="2" md="2" xl="2">
-        <DeviceCardNav/>
-      </CCol> */}
       {deviceDataArr.map((device, index) =>
         device.is_main_panel === 1 ? (
           <CCol xs="6" md="6" xl="6" key={index + 1}>

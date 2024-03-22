@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 
 export const DeviceSummaryContext = createContext();
 

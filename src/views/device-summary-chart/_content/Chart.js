@@ -1,8 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import {
-  useGetDeviceMonitoring,
-  useGetDeviceMonitoringNotLive,
-} from "../../../api/dashboard";
+import { useGetDeviceMonitoring } from "../../../api/dashboard";
 import { useGetSensorByIddDeviceList } from "../../../api/sensor";
 import BigSPinner from "../../../components/ui/big-spinner/BigSpinner";
 import moment from "moment";
