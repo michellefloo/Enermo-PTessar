@@ -14,7 +14,7 @@ const DeviceSummaryChartHeaderWidget = () => {
             color="info"
             iconPadding={false}
             header={selectedDevice.name ? selectedDevice.name : "unknown"}
-            text="Device Summary"
+            text="Device Realtime Summary"
             className="font-size-large text-uppercase font-weight-bold"
           >
             <CIcon width={24} content={cilBolt} />

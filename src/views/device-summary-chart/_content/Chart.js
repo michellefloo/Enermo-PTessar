@@ -81,7 +81,8 @@ const LiveSensorChart = () => {
   return (
     <>
       <CRow>
-        <CCol>
+        <CCol className="text-center d-blok">
+          <i>Klik legenda untuk menampilkan filter</i>
           <CChartLine labels={chartLabels} datasets={chartData} />
         </CCol>
       </CRow>

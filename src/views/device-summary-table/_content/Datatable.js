@@ -17,6 +17,7 @@ import { useGetDeviceMonitoring } from "src/api/dashboard";
 import { TimeConfigProviderContext } from "../../dashboard/_provider/TimeConfigProvider";
 import { DeviceSummaryContext } from "../_provider/DeviceSummaryProvider";
 import BigSpinner from "src/components/ui/big-spinner/BigSpinner";
+import Status from "src/views/device-summary-table/_content/parameters/Status";
 
 const SelectionColumnSlot = ({ onSelected }) => {
   return (
@@ -74,6 +75,14 @@ const DeviceDescSlot = ({ data }) => {
   );
 };
 
+const StatusSlot = ({ data }) => {
+  return (
+    <td style={{ textAlign: "center" }}>
+      <Status data={data} id_device={data.id_device} />
+    </td>
+  );
+};
+
 const DeviceSummaryDataTable = ({ id_device }) => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -81,7 +90,6 @@ const DeviceSummaryDataTable = ({ id_device }) => {
   const { isNeedToLoading } = useContext(DeviceSummaryContext);
   const [deviceSummaryResult, setDeviceSummaryResult] = useState([]);
   const [isSelectAllSelected, setSelectAllSelected] = useState(false);
-  const { data: listData, status: listStatus } = useGetDeviceList();
   const { data: monitorData, status: monitorStatus } = useGetDeviceMonitoring(
     id_device, // Id perangkat, bisa diabaikan karena ingin menampilkan semua perangkat
     null,
@@ -140,7 +148,7 @@ const DeviceSummaryDataTable = ({ id_device }) => {
   };
 
   const handleColumnFilterChange = (e) => {
-    if (listStatus !== "success") {
+    if (monitorStatus !== "success") {
       return;
     }
     let isFilterEmpty = true;
@@ -152,7 +160,7 @@ const DeviceSummaryDataTable = ({ id_device }) => {
       }
     }
     if (isFilterEmpty) {
-      setDeviceSummaryResult(listData.result);
+      setDeviceSummaryResult(monitorData.result);
     }
     if (isSelectAllSelected) {
       handleSelectAll(true);
@@ -160,11 +168,11 @@ const DeviceSummaryDataTable = ({ id_device }) => {
   };
 
   const handleOnFilteredItemsChange = (items) => {
-    if (listStatus !== "success") {
+    if (monitorStatus !== "success") {
       return;
     }
     if (items.length === 0) {
-      setDeviceSummaryResult(listData.result);
+      setDeviceSummaryResult(monitorData.result);
       return;
     }
     setDeviceSummaryResult(items);
@@ -190,7 +198,7 @@ const DeviceSummaryDataTable = ({ id_device }) => {
     {
       key: "status",
       label: "Status",
-      _style: { width: "10%", textAlign: "center" },
+      _style: { width: "5%", textAlign: "center" },
     },
     {
       key: "cycle",
@@ -225,6 +233,7 @@ const DeviceSummaryDataTable = ({ id_device }) => {
         toggleDeviceSummaryDetail={handleDeviceSummaryTable}
       />
     ),
+    status: (item) => <StatusSlot data={item} />,
     _style: { textAlign: "center" },
   };
 
@@ -237,7 +246,7 @@ const DeviceSummaryDataTable = ({ id_device }) => {
         id_main_customer: item.id_main_customer,
         device_desc: item.device_desc,
         device_name: item.device_name,
-        status: item.status,
+        device_serial_number: item.sensors_details[0]?.device_serial_number,
         cycle: item.cycle_count_summarys[0]?.cycle || 0,
         billing: item.billing,
         is_main_panel: item.is_main_panel,
@@ -281,7 +290,7 @@ const DeviceSummaryDataTable = ({ id_device }) => {
         scopedSlots={scopedSlots}
         columnFilter
         itemsPerPage={15}
-        loading={listStatus === "loading"}
+        loading={monitorStatus === "loading"}
         onColumnFilterChange={(e) => handleColumnFilterChange(e)}
         onFilteredItemsChange={(i) => handleOnFilteredItemsChange(i)}
         hover

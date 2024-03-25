@@ -1,9 +1,10 @@
 import React, { Fragment } from "react";
-import { CRow, CCol, CCard, CCardHeader, CCardBody } from "@coreui/react";
+import { CRow, CCol, CCard } from "@coreui/react";
 import DeviceHeaderWidget from "./_content/HeaderWidget";
 import ErrorHandler from "./_content/ErrorHandler";
-import Chart from "./_content/Chart";
 import TimeConfigProvider from "../dashboard/_provider/TimeConfigProvider";
+import DeviceSummaryCardFactory from "./_content/device-summary-card/DeviceSummaryCardFactory";
+import CycleDetailModal from "./_content/modals/CycleDetailModal";
 const DeviceSummaryChart = () => {
   return (
     <TimeConfigProvider>
@@ -13,20 +14,10 @@ const DeviceSummaryChart = () => {
             <DeviceHeaderWidget />
           </CCol>
         </CRow>
-        {/* <CRow>
-        <CCol xs="12" md="12">
-          <HistoryDateSelector />
-        </CCol>
-      </CRow> */}
         <CCard>
-          <CCardHeader>
-            <strong>Device Summary Chart</strong>
-          </CCardHeader>
-          <CCardBody className="text-center d-blok">
-            <i>Klik legenda untuk menampilkan filter</i>
-            <Chart />
-          </CCardBody>
+          <DeviceSummaryCardFactory />
         </CCard>
+        <CycleDetailModal />
         <ErrorHandler />
       </Fragment>
     </TimeConfigProvider>

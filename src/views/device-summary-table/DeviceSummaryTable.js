@@ -15,7 +15,7 @@ const DeviceSummaryTable = () => {
         </CRow>
         <CCard>
           <CCardHeader>
-            <strong>Device Summary Table</strong>
+            <strong>Device Realtime Summary Table</strong>
           </CCardHeader>
           <CCardBody>
             <Datatable />

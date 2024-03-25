@@ -11,7 +11,7 @@ const HistoryDeviceErrorHandler = () => {
         type: "set",
         infoHeaderShow: true,
         theObjectNotFound: "device",
-        objectNoFoundDataLink: "/device/list",
+        objectNoFoundDataLink: "/device/realtime/summary",
       });
     }
     if (selectedDevice.id > 0) {
