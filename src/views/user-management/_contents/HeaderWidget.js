@@ -36,7 +36,7 @@ const UserManegementHeaderCounter = () => {
 
   return (
     <CRow>
-      <CCol xs="12" sm="6" lg="4">
+      <CCol xs="12" sm="4" lg="4">
         <CWidgetIcon
           header={String(rqDataUserManAllCount)}
           text="Total User"
@@ -45,7 +45,7 @@ const UserManegementHeaderCounter = () => {
           <CIcon width={24} content={cilUser} />
         </CWidgetIcon>
       </CCol>
-      <CCol xs="12" sm="6" lg="4">
+      <CCol xs="12" sm="4" lg="4">
         <CWidgetIcon
           header={String(rqDataUserManLockCount)}
           text="Locked User(s)"
@@ -54,7 +54,7 @@ const UserManegementHeaderCounter = () => {
           <CIcon width={24} content={cilLockLocked} />
         </CWidgetIcon>
       </CCol>
-      <CCol xs="12" sm="6" lg="4" style={{ minWidth: "195px" }}>
+      <CCol xs="12" sm="4" lg="4">
         <CWidgetIcon
           header={String(rqDataUserManUnverifiedCount)}
           text="Unverified User(s)"

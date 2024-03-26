@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux'
 const DeviceActionButtonContainer = () => {
     const dispatch = useDispatch()
     return(
-    <CContainer className="d-flex justify-content-end flex-wrap" fluid>
+    <CContainer className="d-flex justify-content-end flex-wrap mb-3" fluid>
         <div className="p-2">
             <CButton color="info"
                 onClick={() => dispatch({
