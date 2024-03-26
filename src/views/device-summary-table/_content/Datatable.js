@@ -12,7 +12,7 @@ import {
 } from "@coreui/react";
 
 import { useHistory } from "react-router-dom";
-import { useGetDeviceList } from "src/api/device";
+// import { useGetDeviceList } from "src/api/device";
 import { useGetDeviceMonitoring } from "src/api/dashboard";
 import { TimeConfigProviderContext } from "../../dashboard/_provider/TimeConfigProvider";
 import { DeviceSummaryContext } from "../_provider/DeviceSummaryProvider";

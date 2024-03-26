@@ -3,7 +3,7 @@ import { useGetSensorByIddDeviceList } from "src/api/sensor";
 import { useGetLocationMonitoring } from "../../../../api/dashboard";
 import { TimeConfigProviderContext } from "src/views/dashboard/_provider/TimeConfigProvider";
 import CIcon from "@coreui/icons-react";
-import { cilLocationPin, cilXCircle } from "@coreui/icons";
+import { cilLocationPin } from "@coreui/icons";
 
 export const Gps1 = ({ id_device, types }) => {
   const { locationMonitorTime } = useContext(TimeConfigProviderContext);
