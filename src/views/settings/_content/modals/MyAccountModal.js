@@ -190,20 +190,20 @@ const ResetPasswordModal = () => {
       </CModalBody>
       <CModalFooter>
         <CButton
+          color="info"
+          disabled={isSubmitting}
+          // className="w-25"
+          onClick={() => formRef.current.handleSubmit()}
+        >
+          <strong>Submit</strong>
+        </CButton>{" "}
+        <CButton
           color="warning"
           disabled={isSubmitting}
           onClick={() => dispatch({ type: "CLOSE_MODAL" })}
         >
           Cancel
         </CButton>
-        <CButton
-          color="info"
-          disabled={isSubmitting}
-          className="w-25"
-          onClick={() => formRef.current.handleSubmit()}
-        >
-          <strong>Submit</strong>
-        </CButton>{" "}
       </CModalFooter>
     </CModal>
   );

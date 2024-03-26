@@ -149,19 +149,19 @@ const BudgetUpdateModal = () => {
       <CModalFooter>
         <CButton
           disabled={isSubmitting}
+          color="info"
+          // className="w-25"
+          onClick={() => formRef.current.submitForm()}
+        >
+          <strong>Submit</strong>
+        </CButton>{" "}
+        <CButton
+          disabled={isSubmitting}
           color="warning"
           onClick={() => dispatch({ type: "CLOSE_MODAL" })}
         >
           Cancel
         </CButton>
-        <CButton
-          disabled={isSubmitting}
-          color="info"
-          className="w-25"
-          onClick={() => formRef.current.submitForm()}
-        >
-          <strong>Submit</strong>
-        </CButton>{" "}
       </CModalFooter>
     </CModal>
   );
